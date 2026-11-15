@@ -1,0 +1,35 @@
+[project]
+name = "docurag"
+version = "0.1.0"
+description = "Document question answering using retrieval-augmented generation"
+readme = "README.md"
+authors = [
+    { name = "shaheenkhan", email = "khanshaheen728@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+docurag = "docurag:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.7.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
