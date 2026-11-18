@@ -7,6 +7,7 @@ from sqlalchemy import (
     CheckConstraint,
     Computed,
     DateTime,
+    Float,
     ForeignKey,
     Index,
     Integer,
@@ -33,6 +34,25 @@ class Document(Base):
 
     filename: Mapped[str] = mapped_column(String(255))
     content_type: Mapped[str] = mapped_column(String(100))
+    content_hash: Mapped[str | None] = mapped_column(String(64))
+
+    storage_path: Mapped[str | None] = mapped_column(Text)
+
+    status: Mapped[str] = mapped_column(
+        String(20),
+        default="queued",
+        server_default=text("'queued'"),
+    )
+
+    error_message: Mapped[str | None] = mapped_column(Text)
+
+    chunk_count: Mapped[int] = mapped_column(
+        Integer,
+        default=0,
+        server_default=text("0"),
+    )
+
+    processing_seconds: Mapped[float | None] = mapped_column(Float)
 
     metadata_: Mapped[dict[str, Any]] = mapped_column(
         "metadata",
@@ -44,6 +64,24 @@ class Document(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
+    )
+    __table_args__ = (
+        UniqueConstraint(
+            "content_hash",
+            name="uq_documents_content_hash",
+        ),
+        CheckConstraint(
+            "status IN ('queued', 'processing', 'completed', 'failed')",
+            name="ck_documents_status",
+        ),
+        CheckConstraint(
+            "chunk_count >= 0",
+            name="ck_documents_chunk_count",
+        ),
+        CheckConstraint(
+            "processing_seconds >= 0",
+            name="ck_documents_processing_seconds",
+        ),
     )
 
 

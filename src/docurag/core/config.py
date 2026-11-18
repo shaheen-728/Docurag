@@ -35,6 +35,25 @@ class Settings(BaseSettings):
     openai_generation_model: str = "gpt-4.1-mini"
     openai_embedding_model: str = "text-embedding-3-small"
 
+    chunker: Literal["recursive", "token"] = "recursive"
+
+    character_chunk_size: int = Field(default=1200, ge=100)
+    character_chunk_overlap: int = Field(default=200, ge=0)
+
+    token_chunk_size: int = Field(default=300, ge=32)
+    token_chunk_overlap: int = Field(default=50, ge=0)
+
+    embedding_batch_size: int = Field(default=16, ge=1, le=100)
+
+    upload_directory: str = "/app/uploads"
+    max_upload_bytes: int = Field(default=20 * 1024 * 1024, ge=1)
+
+    embedding_texts_per_minute: int = Field(
+        default=40,
+        ge=1,
+        le=60,
+    )
+
     @property
     def database_url(self) -> URL:
         return URL.create(

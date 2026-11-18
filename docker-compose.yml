@@ -1,10 +1,10 @@
 services:
   api:
-    env_file:
-      - .env
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - "127.0.0.1:8000:8000"
     environment:
@@ -13,7 +13,10 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
       POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      REDIS_URL: redis://redis:6379/0 
+      REDIS_URL: "redis://redis:6379/0"
+      UPLOAD_DIRECTORY: /app/uploads
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       postgres:
         condition: service_healthy
@@ -29,6 +32,35 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - celery
+      - -A
+      - docurag.worker.celery_app:celery_app
+      - worker
+      - --loglevel=INFO
+      - --concurrency=1
+    env_file:
+      - .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      REDIS_URL: "redis://redis:6379/0"
+      UPLOAD_DIRECTORY: /app/uploads
+    volumes:
+      - uploads_data:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   postgres:
     image: pgvector/pgvector:pg16
@@ -62,3 +94,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  uploads_data:
