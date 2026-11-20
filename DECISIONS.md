@@ -113,3 +113,35 @@ Record these after implementation and evaluation:
 - Conversation query rewriting.
 - Generation timeouts and fallback behavior.
 - Evaluation configuration and deployment choices.
+
+## Generation, streaming and citations
+
+- Use vector retrieval for chat based on the Day 3 development results.
+- Pass answer rules as system instructions and retrieved context as data.
+- Require numbered citations and an explicit insufficient-context response.
+- Stream text through POST /chat using SSE events:
+  token, citations, done, and error.
+- Return structured metadata for sources cited in the answer.
+- Rewrite follow-up questions into standalone retrieval queries.
+  Conversation history is supplied by the client; it is not persisted.
+- Verified a three-turn conversation with correct source references.
+- Verified refusal when the selected document cannot answer the question.
+- Reject questions exceeding 1,000 characters with HTTP 422.
+- Apply retrieval, rewrite, and generation timeouts.
+- Configure gemini-2.5-flash-lite as generation fallback.
+- Verified fallback switching with simulated failures. Never switch models
+  after answer text has streamed.
+- Correlate Gemini rewrite, embedding, and generation calls by request ID.
+- Log provider-reported generation tokens, latency, and estimated
+  standard paid-tier generation cost.
+
+### Limitations
+
+- Embedding responses did not return token usage; embedding tokens and
+  cost remain unknown, so combined API cost is not reported.
+- Usage accounting currently covers Gemini, not OpenAI.
+- Citation validation checks source numbers, not claim support.
+- System instructions reduce prompt-injection risk but do not guarantee
+  resistance.
+- Streamed answers remain provisional until the done event.
+- Recorded latency examples are individual requests, not p95 measurements.

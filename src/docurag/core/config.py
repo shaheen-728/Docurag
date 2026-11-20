@@ -57,6 +57,14 @@ class Settings(BaseSettings):
     reranker_model: str = "BAAI/bge-reranker-base"
     reranker_candidates: int = Field(default=20, ge=1, le=20)
 
+    generation_fallback_model: str | None = None
+
+    generation_attempt_timeout_seconds: float = Field(
+        default=30.0,
+        gt=0,
+        le=120,
+    )
+
     @property
     def database_url(self) -> URL:
         return URL.create(

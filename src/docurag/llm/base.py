@@ -24,12 +24,22 @@ class LLMProvider(ABC):
         ...
 
     @abstractmethod
-    async def generate(self, prompt: str) -> str:
+    async def generate(
+        self,
+        prompt: str,
+        *,
+        system_instruction: str | None = None,
+    ) -> str:
         """Return a complete generated response."""
         ...
 
     @abstractmethod
-    def stream(self, prompt: str) -> AsyncIterator[str]:
+    def stream(
+        self,
+        prompt: str,
+        *,
+        system_instruction: str | None = None,
+    ) -> AsyncIterator[str]:
         """Yield generated text fragments."""
         ...
 
