@@ -1,0 +1,42 @@
+[
+  {
+    "id": "q1",
+    "query": "How can I pass configuration values into a container?"
+  },
+  {
+    "id": "q2",
+    "query": "Can I change the data in an immutable ConfigMap?"
+  },
+  {
+    "id": "q3",
+    "query": "How can I roll back a Deployment to an earlier revision?"
+  },
+  {
+    "id": "q4",
+    "query": "Which workload gives Pods stable identities and persistent storage?"
+  },
+  {
+    "id": "q5",
+    "query": "How can I run a logging agent on every eligible node?"
+  },
+  {
+    "id": "q6",
+    "query": "How can I limit retries when a Kubernetes Job fails?"
+  },
+  {
+    "id": "q7",
+    "query": "How can I prevent overlapping runs of the same CronJob?"
+  },
+  {
+    "id": "q8",
+    "query": "How can I deny all incoming traffic to selected Pods?"
+  },
+  {
+    "id": "q9",
+    "query": "What is the difference between a PersistentVolume and a PersistentVolumeClaim?"
+  },
+  {
+    "id": "q10",
+    "query": "Do init containers finish before application containers start?"
+  }
+]

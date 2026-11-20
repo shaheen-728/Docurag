@@ -15,8 +15,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       REDIS_URL: "redis://redis:6379/0"
       UPLOAD_DIRECTORY: /app/uploads
+      HF_HOME: /app/.cache/huggingface
+      OMP_NUM_THREADS: "2"
     volumes:
       - uploads_data:/app/uploads
+      - huggingface_cache:/app/.cache/huggingface
     depends_on:
       postgres:
         condition: service_healthy
@@ -95,3 +98,4 @@ volumes:
   postgres_data:
   redis_data:
   uploads_data:
+  huggingface_cache:

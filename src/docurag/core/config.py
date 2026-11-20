@@ -54,6 +54,9 @@ class Settings(BaseSettings):
         le=60,
     )
 
+    reranker_model: str = "BAAI/bge-reranker-base"
+    reranker_candidates: int = Field(default=20, ge=1, le=20)
+
     @property
     def database_url(self) -> URL:
         return URL.create(
