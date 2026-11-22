@@ -1,7 +1,5 @@
 from collections.abc import AsyncIterator
-from contextlib import aclosing
 
-from google.genai import types
 from openai import AsyncOpenAI
 
 from docurag.core.config import Settings
@@ -62,10 +60,16 @@ class OpenAIProvider(LLMProvider):
             dimensions=self.settings.embedding_dimensions,
         )
 
-    async def generate(self, prompt: str) -> str:
+    async def generate(
+        self,
+        prompt: str,
+        *,
+        system_instruction: str | None = None,
+    ) -> str:
         response = await self.client.responses.create(
             model=self.settings.openai_generation_model,
             input=prompt,
+            instructions=system_instruction,
         )
 
         if not response.output_text:
@@ -79,18 +83,21 @@ class OpenAIProvider(LLMProvider):
         *,
         system_instruction: str | None = None,
     ) -> AsyncIterator[str]:
-        response = await self.client.models.generate_content_stream(
-            model=self.settings.gemini_generation_model,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=system_instruction,
-            ),
-        )
-
-        async with aclosing(response):
-            async for chunk in response:
-                if chunk.text:
-                    yield chunk.text
+        async with self.client.responses.stream(
+            model=self.settings.openai_generation_model,
+            input=prompt,
+            instructions=system_instruction,
+        ) as response:
+            async for event in response:
+                if event.type == "response.output_text.delta":
+                    yield event.delta
+                elif event.type == "error":
+                    raise RuntimeError("OpenAI streaming request failed.")
+                elif event.type in {
+                    "response.failed",
+                    "response.incomplete",
+                }:
+                    raise RuntimeError("OpenAI stream did not complete successfully.")
 
     async def aclose(self) -> None:
         await self.client.close()

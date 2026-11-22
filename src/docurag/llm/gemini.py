@@ -1,12 +1,13 @@
 import logging
 from collections.abc import AsyncIterator
-from contextlib import aclosing
+from contextlib import aclosing, nullcontext
 from time import perf_counter
 
 from google import genai
 from google.genai import types
 
 from docurag.core.config import Settings
+from docurag.core.tracing import get_tracing_client
 from docurag.llm.accounting import (
     current_accounting,
     record_embedding,
@@ -51,6 +52,45 @@ class GeminiProvider(LLMProvider):
         if not texts:
             return []
 
+        client = get_tracing_client()
+
+        context = (
+            client.start_as_current_observation(
+                name=f"gemini.embed.{task}",
+                as_type="embedding",
+                model=self.settings.gemini_embedding_model,
+                metadata={
+                    "provider": "gemini",
+                    "task": task,
+                    "text_count": len(texts),
+                    "dimensions": self.settings.embedding_dimensions,
+                    "usage_source": "not_returned_by_provider",
+                },
+            )
+            if client is not None
+            else nullcontext()
+        )
+
+        with context as observation:
+            vectors = await self._embed(texts, task=task)
+
+            if observation is not None:
+                observation.update(
+                    output={
+                        "vector_count": len(vectors),
+                        "dimensions": self.settings.embedding_dimensions,
+                        "completed": True,
+                    }
+                )
+
+            return vectors
+
+    async def _embed(
+        self,
+        texts: list[str],
+        *,
+        task: EmbeddingTask = "document",
+    ) -> list[list[float]]:
         validate_texts(texts)
 
         started = perf_counter()
@@ -63,7 +103,7 @@ class GeminiProvider(LLMProvider):
                 contents=texts,
                 config=types.EmbedContentConfig(
                     task_type=task_type,
-                    output_dimensionality=(self.settings.embedding_dimensions),
+                    output_dimensionality=self.settings.embedding_dimensions,
                 ),
             )
 
@@ -113,6 +153,45 @@ class GeminiProvider(LLMProvider):
         *,
         system_instruction: str | None = None,
     ) -> str:
+        client = get_tracing_client()
+
+        context = (
+            client.start_as_current_observation(
+                name="gemini.generate",
+                as_type="generation",
+                model=self.settings.gemini_generation_model,
+                metadata={
+                    "provider": "gemini",
+                    "streaming": False,
+                    "prompt_characters": len(prompt),
+                },
+            )
+            if client is not None
+            else nullcontext()
+        )
+
+        with context as observation:
+            answer = await self._generate(
+                prompt,
+                system_instruction=system_instruction,
+            )
+
+            if observation is not None:
+                observation.update(
+                    output={
+                        "answer_characters": len(answer),
+                        "completed": True,
+                    }
+                )
+
+            return answer
+
+    async def _generate(
+        self,
+        prompt: str,
+        *,
+        system_instruction: str | None = None,
+    ) -> str:
         started = perf_counter()
         usage = None
         completed = False
@@ -143,6 +222,55 @@ class GeminiProvider(LLMProvider):
             )
 
     async def stream(
+        self,
+        prompt: str,
+        *,
+        system_instruction: str | None = None,
+    ) -> AsyncIterator[str]:
+        client = get_tracing_client()
+
+        context = (
+            client.start_as_current_observation(
+                name="gemini.stream",
+                as_type="generation",
+                model=self.settings.gemini_generation_model,
+                metadata={
+                    "provider": "gemini",
+                    "streaming": True,
+                    "prompt_characters": len(prompt),
+                },
+            )
+            if client is not None
+            else nullcontext()
+        )
+
+        with context as observation:
+            output_characters = 0
+            completed = False
+
+            try:
+                async with aclosing(
+                    self._stream(
+                        prompt,
+                        system_instruction=system_instruction,
+                    )
+                ) as stream:
+                    async for fragment in stream:
+                        output_characters += len(fragment)
+                        yield fragment
+
+                completed = True
+
+            finally:
+                if observation is not None:
+                    observation.update(
+                        output={
+                            "answer_characters": output_characters,
+                            "completed": completed,
+                        }
+                    )
+
+    async def _stream(
         self,
         prompt: str,
         *,

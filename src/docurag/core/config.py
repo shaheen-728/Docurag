@@ -68,6 +68,11 @@ class Settings(BaseSettings):
     retrieval_cache_enabled: bool = True
     retrieval_cache_ttl_seconds: int = Field(default=60, ge=1, le=3600)
 
+    langfuse_enabled: bool = False
+    langfuse_public_key: str = ""
+    langfuse_secret_key: SecretStr = SecretStr("")
+    langfuse_base_url: str = "https://cloud.langfuse.com"
+
     @property
     def database_url(self) -> URL:
         return URL.create(
