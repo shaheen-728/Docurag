@@ -2,10 +2,11 @@ import asyncio
 from logging.config import fileConfig
 
 from alembic import context
-from docurag.core.config import get_settings
-from docurag.db.models import Base
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import create_async_engine
+
+from docurag.core.config import get_settings
+from docurag.db.models import Base
 
 config = context.config
 
