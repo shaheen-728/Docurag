@@ -1,0 +1,1 @@
+[![CI](https://github.com/shaheen-728/Docurag/actions/workflows/ci.yml/badge.svg)](https://github.com/shaheen-728/Docurag/actions/workflows/ci.yml)

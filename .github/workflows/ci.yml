@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: docurag_test
+          POSTGRES_USER: docurag
+          POSTGRES_PASSWORD: ci-test-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U docurag -d docurag_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      POSTGRES_DB: docurag_test
+      POSTGRES_USER: docurag
+      POSTGRES_PASSWORD: ci-test-password
+      DB_HOST: 127.0.0.1
+      DB_PORT: "5432"
+      DOCURAG_RUN_DB_TESTS: "1"
+      GEMINI_API_KEY: ""
+      OPENAI_API_KEY: ""
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install locked dependencies
+        run: uv sync --locked --group dev
+
+      - name: Check lint
+        run: uv run --locked ruff check .
+
+      - name: Check formatting
+        run: uv run --locked ruff format --check .
+
+      - name: Apply database migrations
+        run: uv run --locked alembic -c alembic.ini upgrade head
+
+      - name: Check model and migration consistency
+        run: uv run --locked alembic -c alembic.ini check
+
+      - name: Run unit and integration tests
+        run: uv run --locked python -m pytest tests -q
