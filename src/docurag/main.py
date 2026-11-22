@@ -1,17 +1,10 @@
-import logging
-
 from fastapi import FastAPI
 
+from docurag.core.logging import configure_logging
 from docurag.llm.accounting import ChatAccountingMiddleware
 from docurag.routers import chat, documents, health, search
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s %(message)s",
-)
-
-# Enable application INFO logs explicitly.
-logging.getLogger("docurag").setLevel(logging.INFO)
+configure_logging()
 
 app = FastAPI(
     title="DocuRAG",

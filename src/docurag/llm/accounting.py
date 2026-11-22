@@ -1,4 +1,3 @@
-import json
 import logging
 from contextvars import ContextVar
 from dataclasses import dataclass, field
@@ -190,8 +189,8 @@ class ChatAccountingMiddleware:
                 }
 
                 logger.info(
-                    "chat_accounting %s",
-                    json.dumps(summary),
+                    "chat_accounting",
+                    extra={"event_data": summary},
                 )
             finally:
                 current_accounting.reset(context_token)

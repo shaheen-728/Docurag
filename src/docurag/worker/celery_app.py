@@ -1,6 +1,14 @@
 from celery import Celery
+from celery.signals import setup_logging
 
 from docurag.core.config import get_settings
+from docurag.core.logging import configure_logging
+
+
+@setup_logging.connect
+def configure_worker_logging(**kwargs: object) -> None:
+    configure_logging()
+
 
 settings = get_settings()
 
