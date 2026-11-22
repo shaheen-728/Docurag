@@ -2,11 +2,12 @@ import logging
 from typing import Annotated
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from google.genai import errors as google_errors
 from openai import APIError as OpenAIAPIError
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from docurag.core.rate_limit import limiter
 from docurag.db.session import get_session
 from docurag.retrieval.cache import cached_search
 from docurag.retrieval.reranker import RerankerUnavailable
@@ -53,7 +54,9 @@ async def execute_search(
 
 
 @router.post("/search", response_model=SearchResponse)
+@limiter.limit("30/minute")
 async def search_documents(
+    request: Request,
     payload: SearchRequest,
     session: SessionDependency,
 ) -> SearchResponse:
@@ -61,7 +64,9 @@ async def search_documents(
 
 
 @router.get("/search", response_model=SearchResponse)
+@limiter.limit("30/minute")
 async def debug_search(
+    request: Request,
     payload: Annotated[SearchRequest, Query()],
     session: SessionDependency,
 ) -> SearchResponse:

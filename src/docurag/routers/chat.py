@@ -6,7 +6,7 @@ from collections.abc import AsyncIterator
 from contextlib import aclosing
 from time import perf_counter
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import ValidationError
 
@@ -17,6 +17,7 @@ from docurag.chat.prompts import (
     build_answer_prompt,
 )
 from docurag.chat.rewrite import rewrite_query
+from docurag.core.rate_limit import limiter
 from docurag.routers.search import SessionDependency, execute_search
 from docurag.schemas.chat import ChatRequest
 from docurag.schemas.search import SearchRequest
@@ -35,7 +36,9 @@ def sse(event: str, payload: dict) -> str:
 
 
 @router.post("/chat")
+@limiter.limit("10/minute")
 async def chat_with_documents(
+    request: Request,
     payload: ChatRequest,
     session: SessionDependency,
 ) -> StreamingResponse:
