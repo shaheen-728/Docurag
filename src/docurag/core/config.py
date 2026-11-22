@@ -65,6 +65,9 @@ class Settings(BaseSettings):
         le=120,
     )
 
+    retrieval_cache_enabled: bool = True
+    retrieval_cache_ttl_seconds: int = Field(default=60, ge=1, le=3600)
+
     @property
     def database_url(self) -> URL:
         return URL.create(

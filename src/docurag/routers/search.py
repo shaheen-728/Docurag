@@ -8,8 +8,8 @@ from openai import APIError as OpenAIAPIError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from docurag.db.session import get_session
+from docurag.retrieval.cache import cached_search
 from docurag.retrieval.reranker import RerankerUnavailable
-from docurag.retrieval.service import search
 from docurag.schemas.search import SearchRequest, SearchResponse
 
 logger = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ async def execute_search(
     debug: bool,
 ) -> SearchResponse:
     try:
-        return await search(session, payload, debug=debug)
+        return await cached_search(session, payload, debug=debug)
 
     except (
         google_errors.APIError,

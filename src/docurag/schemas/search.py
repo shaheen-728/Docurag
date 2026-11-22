@@ -34,6 +34,7 @@ class SearchRequest(BaseModel):
     created_before: AwareDatetime | None = None
 
     rerank: bool = False
+    use_cache: bool = False
 
     @model_validator(mode="after")
     def validate_options(self) -> Self:
@@ -86,3 +87,4 @@ class SearchResponse(BaseModel):
     rerank_applied: bool = False
     rerank_ms: float = 0.0
     reranker_model: str | None = None
+    cache_hit: bool = False

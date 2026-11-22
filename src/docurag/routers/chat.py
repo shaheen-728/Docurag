@@ -74,6 +74,7 @@ async def chat_with_documents(
                     candidate_k=20,
                     source=payload.source,
                     rerank=False,
+                    use_cache=True,
                 ),
                 session,
                 debug=False,

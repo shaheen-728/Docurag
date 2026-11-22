@@ -4,6 +4,7 @@ from uuid import UUID, uuid4
 
 from pgvector.sqlalchemy import VECTOR
 from sqlalchemy import (
+    BigInteger,
     CheckConstraint,
     Computed,
     DateTime,
@@ -25,6 +26,19 @@ EMBEDDING_DIMENSIONS = 768
 
 class Base(DeclarativeBase):
     pass
+
+
+class CorpusRevision(Base):
+    __tablename__ = "corpus_revision"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    revision: Mapped[int] = mapped_column(
+        BigInteger,
+        nullable=False,
+        server_default=text("0"),
+    )
+
+    __table_args__ = (CheckConstraint("id = 1"),)
 
 
 class Document(Base):
