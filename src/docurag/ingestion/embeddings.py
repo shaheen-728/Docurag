@@ -22,6 +22,19 @@ RETRYABLE_CODES = {408, 429, 500, 502, 503, 504}
 
 def is_retryable(error: BaseException) -> bool:
     if isinstance(error, google_errors.APIError):
+        if error.code == 429:
+            message = str(error).casefold()
+
+            # Daily quota cannot recover within this retry window.
+            daily_quota_markers = (
+                "perday",
+                "per day",
+                "daily quota",
+            )
+
+            if any(marker in message for marker in daily_quota_markers):
+                return False
+
         return error.code in RETRYABLE_CODES
 
     if isinstance(error, APIStatusError):
