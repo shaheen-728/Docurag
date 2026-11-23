@@ -181,3 +181,84 @@ Chunk-size experiments use separate databases per variant.
 This preserves baseline data, avoids document/chunk uniqueness conflicts,
 and gives each variant independent HNSW and GIN indexes.
 Retrieval code and settings remain shared across variants.
+
+### chunk-size selection
+
+Compared baseline recursive chunking (1,200 characters, 200-character
+overlap) against token chunk sizes 256, 512 and 1024, each with
+50-token overlap, on 80 development questions.
+
+All variants achieved Hit@5 of 1.000. Baseline achieved the highest
+MRR@5 (0.981) and Precision@5 (0.410). Retain baseline chunking.
+
+Labels are assistant-reviewed, not human-verified. Recall uses
+variant-specific pools. Latency measures database retrieval only.
+These results do not establish statistical superiority or answer quality.
+
+The held-out test remains pending.
+
+### Judge parser metadata normalization
+
+During held-out judging, allow removal of the redundant top-level
+`additionalProperties: false` field. Required judgment fields, scores,
+claims, source validation, and rejection of schema wrappers remain unchanged.
+The judge model and rubric are unchanged. Previously saved judgments are reused.
+
+## final configuration and evaluation status
+
+### Selected configuration
+
+- Chunker: recursive.
+- Chunk size: 1,200 characters.
+- Chunk overlap: 200 characters.
+- Retrieval: vector search.
+- top_k: 5.
+- candidate_k: 20.
+- Reranking: disabled.
+- Answer model: gemini-3.5-flash-lite.
+- Generation fallback: disabled.
+
+### Selection rationale
+
+Compared baseline chunking against token chunk sizes 256, 512 and 1024
+on 80 development questions. Each token variant used 50-token overlap.
+
+All variants achieved Hit@5 of 1.000. Baseline achieved the highest
+MRR@5 (0.981) and Precision@5 (0.410). Retain baseline chunking;
+the comparison does not justify replacing it.
+
+Small latency differences from one fixed-order run do not establish
+a latency winner.
+
+### Held-out evaluation
+
+The frozen test contains 20 questions. Development and test question IDs
+and generation-source document IDs are disjoint.
+
+With the selected configuration, held-out retrieval achieved:
+
+- Hit@5: 0.950 — relevant evidence retrieved for 19/20 questions.
+- MRR@5: 0.950.
+- Pooled Recall@5: 0.938.
+- Precision@5: 0.450.
+
+Do not tune the selected configuration against these held-out results.
+
+All 20 held-out answers have been generated using the development model
+and prompt. Held-out judging remains incomplete because of provider
+availability failures. Final held-out answer-quality scores are pending.
+
+### Evaluation limitations
+
+Relevance labels are assistant-reviewed, not human-verified.
+Partial answer support counts as relevant.
+
+Recall uses reviewed pools rather than exhaustive corpus labels.
+The development chunk-size and held-out retrieval pools differ.
+
+Answer evaluation uses a custom same-model LLM judge, not RAGAS.
+Six calibration cases passed; this is a sanity check, not proof of
+judge accuracy.
+
+Chunk-size latency measures database retrieval only. Held-out API
+search latency has a different scope and is not directly comparable.

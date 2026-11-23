@@ -142,6 +142,14 @@ def parse_judgment(text: str, context_count: int) -> Judgment:
                 ):
                     raise ValueError("source_numbers must be a list of integers.")
 
+    # Ignore only this known, redundant schema-metadata field.
+    # Schema wrappers and all other unexpected fields remain invalid.
+    if "additionalProperties" in value:
+        if value["additionalProperties"] is not False:
+            raise ValueError("Unexpected additionalProperties value.")
+
+        del value["additionalProperties"]
+
     result = Judgment.model_validate(value)
 
     if result.abstained and result.claims:
@@ -259,8 +267,35 @@ async def run(args: argparse.Namespace) -> None:
     review = json.loads(review_raw)
     dataset = json.loads(dataset_raw)
 
-    if args.dataset.stem != "dev":
-        raise ValueError("This step is restricted to dev.json.")
+    if args.dataset.stem not in {"dev", "test"}:
+        raise ValueError("Use a frozen development or test dataset.")
+
+    manifest = json.loads(
+        (args.dataset.parent / "manifest.json").read_text(encoding="utf-8")
+    )
+
+    if manifest.get(f"{args.dataset.stem}_sha256") != sha256(dataset_raw):
+        raise ValueError("Dataset differs from its frozen manifest.")
+
+    if args.dataset.stem == "test":
+        if not args.allow_heldout:
+            raise ValueError("Held-out judging requires --allow-heldout.")
+
+        expected_ids = {item["id"] for item in dataset}
+
+        if (
+            len(dataset) != 20
+            or len(expected_ids) != 20
+            or args.limit != 20
+            or set(answers["answers"]) != expected_ids
+        ):
+            raise ValueError("Expected all 20 unique held-out answers.")
+
+        if any(set(modes) != {"vector"} for modes in answers["answers"].values()):
+            raise ValueError("Held-out answers must be vector-only.")
+
+        if args.output.resolve().parent != Path("results/day5/heldout").resolve():
+            raise ValueError("Save judgments under results/day5/heldout.")
 
     identity = answers["identity"]
 
@@ -287,7 +322,17 @@ async def run(args: argparse.Namespace) -> None:
         if not label["reviewed"]:
             raise ValueError(f"{question_id} needs relevance review.")
 
-        candidate_ids = {item["chunk_id"] for item in label["candidates"]}
+        candidates = {item["chunk_id"]: item for item in label["candidates"]}
+
+        if len(candidates) != len(label["candidates"]):
+            raise ValueError("Duplicate reviewed chunk IDs.")
+
+        if any(
+            type(candidate["relevant"]) is not bool for candidate in candidates.values()
+        ):
+            raise ValueError("Every candidate needs a boolean relevance label.")
+
+        candidate_ids = set(candidates)
 
         for item in modes.values():
             if not item["completed"]:
@@ -298,6 +343,15 @@ async def run(args: argparse.Namespace) -> None:
 
             if any(hit["chunk_id"] not in candidate_ids for hit in item["context"]):
                 raise ValueError("Context contains an unreviewed chunk.")
+
+            for hit in item["context"]:
+                candidate = candidates[hit["chunk_id"]]
+
+                if any(
+                    candidate[key] != hit[key]
+                    for key in ("document_id", "filename", "content")
+                ):
+                    raise ValueError("Answer context differs from reviewed content.")
 
     settings = get_settings()
     model_field = f"{settings.llm_provider}_generation_model"
@@ -317,6 +371,16 @@ async def run(args: argparse.Namespace) -> None:
         "metric_version": 1,
         "timeout_seconds": args.timeout,
     }
+
+    if args.dataset.stem == "test":
+        baseline_path = Path("results/day5/baseline/judgments-dev80.json")
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+
+        for key in ("provider", "model", "rubric_sha256", "metric_version"):
+            if baseline["identity"][key] != judge_identity[key]:
+                raise ValueError(
+                    f"Held-out judge differs from development judge: {key}"
+                )
 
     if args.output.exists():
         state = json.loads(args.output.read_text(encoding="utf-8"))
@@ -342,7 +406,11 @@ async def run(args: argparse.Namespace) -> None:
         for question_id, modes in selected:
             saved = state["judgments"].setdefault(question_id, {})
             question = questions[question_id]
-            relevant_ids = set(labels[question_id]["relevant_chunk_ids"])
+            relevant_ids = {
+                candidate["chunk_id"]
+                for candidate in labels[question_id]["candidates"]
+                if candidate["relevant"]
+            }
 
             for mode, item in modes.items():
                 if mode in saved:
@@ -366,7 +434,7 @@ async def run(args: argparse.Namespace) -> None:
                             answer_correctness=0.0,
                             abstained=True,
                             reason=(
-                                "Pure abstention on an answerable development question."
+                                "Pure abstention on an answerable evaluation question."
                             ),
                         )
                         judge_called = False
@@ -465,6 +533,7 @@ def main() -> None:
         default=Path("results/day5/baseline/judgments.json"),
     )
     parser.add_argument("--model", default=None)
+    parser.add_argument("--allow-heldout", action="store_true")
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument("--pause", type=float, default=8)
     parser.add_argument("--timeout", type=float, default=60)

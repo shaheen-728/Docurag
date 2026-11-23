@@ -39,8 +39,25 @@ async def run(args: argparse.Namespace) -> None:
     questions = json.loads(dataset_raw)
     dataset_hash = checksum(dataset_raw)
 
-    if args.dataset.stem != "dev":
-        raise ValueError("Use the development dataset for this step.")
+    if args.dataset.stem not in {"dev", "test"}:
+        raise ValueError("Use a frozen development or test dataset.")
+
+    if args.dataset.stem == "test":
+        if not args.allow_heldout:
+            raise ValueError("Test generation requires --allow-heldout.")
+
+        if len(questions) != 20 or args.limit != 20:
+            raise ValueError("The held-out run requires all 20 questions.")
+
+        expected_modes = {"vector": {"mode": "vector", "rerank": False}}
+
+        if retrieval["identity"]["modes"] != expected_modes:
+            raise ValueError("Held-out retrieval must be vector-only.")
+
+        expected_directory = Path("results/day5/heldout").resolve()
+
+        if args.output.resolve().parent != expected_directory:
+            raise ValueError("Save held-out answers under results/day5/heldout.")
 
     manifest = json.loads(
         (args.dataset.parent / "manifest.json").read_text(
@@ -48,7 +65,7 @@ async def run(args: argparse.Namespace) -> None:
         )
     )
 
-    if manifest["dev_sha256"] != dataset_hash:
+    if manifest.get(f"{args.dataset.stem}_sha256") != dataset_hash:
         raise ValueError("Dataset differs from the frozen manifest.")
 
     if retrieval["identity"]["dataset_sha256"] != dataset_hash:
@@ -78,6 +95,20 @@ async def run(args: argparse.Namespace) -> None:
         "timeout_seconds": args.timeout,
         "modes": retrieval["identity"]["modes"],
     }
+
+    if args.dataset.stem == "test":
+        baseline_path = Path("results/day5/baseline/answers.json")
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+
+        for key in (
+            "provider",
+            "model",
+            "prompt_sha256",
+            "generation_method",
+            "fallback_enabled",
+        ):
+            if baseline["identity"][key] != identity[key]:
+                raise ValueError(f"Held-out generation differs from baseline: {key}")
 
     if args.output.exists():
         state = json.loads(args.output.read_text(encoding="utf-8"))
@@ -232,6 +263,7 @@ def main() -> None:
         type=Path,
         default=Path("results/day5/baseline/answers.json"),
     )
+    parser.add_argument("--allow-heldout", action="store_true")
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument("--pause", type=float, default=8)
     parser.add_argument("--timeout", type=float, default=60)

@@ -39,8 +39,36 @@ def collect(args: argparse.Namespace) -> None:
     if expected_hash != dataset_hash:
         raise ValueError("Dataset does not match the frozen manifest.")
 
-    if args.dataset.stem != "dev":
-        raise ValueError("This collection step is restricted to dev.json.")
+    if args.dataset.stem not in {"dev", "test"}:
+        raise ValueError("Only frozen dev.json or test.json is supported.")
+
+    selected_modes = {name: MODES[name] for name in args.modes}
+
+    if args.dataset.stem == "test":
+        if not args.allow_heldout:
+            raise ValueError("Held-out collection requires --allow-heldout.")
+
+        if len(questions) != 20 or args.limit != 20:
+            raise ValueError("Held-out collection must include all 20 questions.")
+
+        if set(selected_modes) != {"vector"}:
+            raise ValueError("The frozen held-out mode is vector only.")
+
+        heldout_directory = Path("results/day5/heldout").resolve()
+
+        if args.output.resolve().parent != heldout_directory:
+            raise ValueError("Save held-out results under results/day5/heldout.")
+
+        dev_raw = (args.dataset.parent / "dev.json").read_bytes()
+
+        if hashlib.sha256(dev_raw).hexdigest() != manifest.get("dev_sha256"):
+            raise ValueError("Development dataset differs from its manifest.")
+
+        dev_ids = {item["id"] for item in json.loads(dev_raw)}
+        test_ids = {item["id"] for item in questions}
+
+        if dev_ids & test_ids:
+            raise ValueError("Development and test question IDs overlap.")
 
     identity = {
         "dataset_sha256": dataset_hash,
@@ -48,7 +76,7 @@ def collect(args: argparse.Namespace) -> None:
         "corpus_label": args.corpus_label,
         "top_k": 5,
         "candidate_k": 20,
-        "modes": MODES,
+        "modes": selected_modes,
     }
 
     if args.output.exists():
@@ -68,7 +96,7 @@ def collect(args: argparse.Namespace) -> None:
         save_json(args.output, run)
 
     selected = questions[: args.limit]
-    total_requests = len(selected) * len(MODES)
+    total_requests = len(selected) * len(selected_modes)
 
     print(
         f"Selected questions: {len(selected)}; method requests: {total_requests}",
@@ -83,7 +111,7 @@ def collect(args: argparse.Namespace) -> None:
                 {},
             )
 
-            for name, options in MODES.items():
+            for name, options in selected_modes.items():
                 if name in responses:
                     print(f"{question_id} {name}: reused")
                     continue
@@ -101,6 +129,7 @@ def collect(args: argparse.Namespace) -> None:
                             "query": question["question"],
                             "top_k": identity["top_k"],
                             "candidate_k": identity["candidate_k"],
+                            "use_cache": False,
                             **options,
                         },
                     )
@@ -180,6 +209,13 @@ def main() -> None:
         "--corpus-label",
         default="baseline-recursive-1200-overlap-200",
     )
+    parser.add_argument(
+        "--modes",
+        nargs="+",
+        choices=list(MODES),
+        default=list(MODES),
+    )
+    parser.add_argument("--allow-heldout", action="store_true")
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument("--pause", type=float, default=4)
     args = parser.parse_args()

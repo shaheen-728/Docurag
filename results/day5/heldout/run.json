@@ -1,0 +1,2781 @@
+{
+  "identity": {
+    "dataset_sha256": "9bacd7c9a0f0c430d95c50812edabed089a994027484bfcfc1a90790269831a8",
+    "base_url": "http://127.0.0.1:8000",
+    "corpus_label": "baseline-recursive-1200-overlap-200",
+    "top_k": 5,
+    "candidate_k": 20,
+    "modes": {
+      "vector": {
+        "mode": "vector",
+        "rerank": false
+      }
+    }
+  },
+  "dataset_path": "data/eval/v1/test.json",
+  "label_provenance": "assistant-reviewed",
+  "relevance_scope": "generation_source_only",
+  "responses": {
+    "q007": {
+      "vector": {
+        "client_latency_ms": 1041.349,
+        "response": {
+          "query": "Which Job-specific field selector is listed in the Kubernetes supported-field-selectors table?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 1026.053,
+          "results": [
+            {
+              "chunk_id": "6306c29e-7adc-4456-8bc3-0b2991dfa0d6",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "Field selectors\nlet you select Kubernetes\nobjects\nbased on the\nvalue of one or more resource fields. Here are some examples of field selector queries:\nmetadata.name=my-service\nmetadata.namespace!=default\nstatus.phase=Pending\nThis\nkubectl\ncommand selects all Pods for which the value of the\nstatus.phase\nfield is\nRunning\n:\nkubectl get pods --field-selector status.phase\n=\nRunning",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 81,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Field Selectors"
+              },
+              "vector_distance": 0.2464461775752187,
+              "vector_similarity": 0.7535538224247813,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "f2cc5d84-3255-4bda-aa58-fd31a3437f30",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "When using this feature, make sure the controller indicated by the field is\ninstalled, otherwise the Job may not be reconciled at all.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 28,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.25552523136138916,
+              "vector_similarity": 0.7444747686386108,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "25890fc3-3fd7-4fc6-84e1-e3119c723229",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Normally, when you create a Job object, you do not specify\n.spec.selector\n.\nThe system defaulting logic adds this field when the Job is created.\nIt picks a selector value that will not overlap with any other jobs.\nHowever, in some cases, you might need to override this automatically set selector.\nTo do this, you can specify the\n.spec.selector\nof the Job.\nBe very careful when doing this. If you specify a label selector which is not\nunique to the pods of that Job, and which matches unrelated Pods, then pods of the unrelated\njob may be deleted, or this Job may count other Pods as completing it, or one or both\nJobs may refuse to create Pods or run to completion. If a non-unique selector is\nchosen, then other controllers (e.g. ReplicationController) and their Pods may behave\nin unpredictable ways too. Kubernetes will not stop you from making a mistake when\nspecifying\n.spec.selector\n.\nHere is an example of a case when you might want to use this feature.\nSay Job\nold\nis already running. You want existing Pods\nto keep running, but you want the rest of the Pods it creates\nto use a different pod template and for the Job to have a new name.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 258,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Specifying your own Pod selector"
+              },
+              "vector_distance": 0.2646569767389867,
+              "vector_similarity": 0.7353430232610133,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4d02f39e-b976-41a9-b1f1-6cede22bfe95",
+              "document_id": "b26b8d8d-2f51-45b2-a381-4fb982589823",
+              "filename": "overview--working-with-objects--labels.html",
+              "content": "Newer resources, such as\nJob\n,\nDeployment\n,\nReplicaSet\n, and\nDaemonSet\n,\nsupport\nset-based\nrequirements as well.\nselector\n:\nmatchLabels\n:\ncomponent\n:\nredis\nmatchExpressions\n:\n- {\nkey: tier, operator: In, values\n:\n[\ncache] }\n- {\nkey: environment, operator: NotIn, values\n:\n[\ndev] }\nmatchLabels\nis a map of\n{key,value}\npairs. A single\n{key,value}\nin the\nmatchLabels\nmap is equivalent to an element of\nmatchExpressions\n, whose\nkey\nfield is \"key\", the\noperator\nis \"In\", and the\nvalues\narray contains only \"value\".\nmatchExpressions\nis a list of pod selector requirements. Valid operators include\nIn, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of\nIn and NotIn. All of the requirements, from both\nmatchLabels\nand\nmatchExpressions\nare ANDed together -- they must all be satisfied in order to match.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--labels.html",
+                "token_count": 225,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Resources that support set-based requirements"
+              },
+              "vector_distance": 0.27808578479801194,
+              "vector_similarity": 0.7219142152019881,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "1e0264db-5fe6-4a9f-ac0f-27e84f267597",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Feature state:\nStable\nsince Kubernetes v1.35; enabled by default\nMore information about this feature\nThis is a stable feature in Kubernetes, and has been since version 1.35. It was first available in the v1.30 release.\nThis feature allows you to disable the built-in Job controller, for a specific\nJob, and delegate reconciliation of the Job to an external controller.\nYou indicate the controller that reconciles the Job by setting a custom value\nfor the\nspec.managedBy\nfield - any value\nother than\nkubernetes.io/job-controller\n. The value of the field is immutable.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 127,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Delegation of managing a Job object to external controller"
+              },
+              "vector_distance": 0.28232686028916354,
+              "vector_similarity": 0.7176731397108365,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q011": {
+      "vector": {
+        "client_latency_ms": 584.058,
+        "response": {
+          "query": "Which parameter is used to specify the DNS name when defining a Service of type ExternalName?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 571.589,
+          "results": [
+            {
+              "chunk_id": "d035ec68-8db2-413e-a887-a8a5999091d3",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Services of type ExternalName map a Service to a DNS name, not to a typical selector such as\nmy-service\nor\ncassandra\n. You specify these Services with the\nspec.externalName\nparameter.\nThis Service definition, for example, maps\nthe\nmy-service\nService in the\nprod\nnamespace to\nmy.database.example.com\n:\napiVersion\n:\nv1\nkind\n:\nService\nmetadata\n:\nname\n:\nmy-service\nnamespace\n:\nprod\nspec\n:\ntype\n:\nExternalName\nexternalName\n:\nmy.database.example.com",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 115,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "type: ExternalName"
+              },
+              "vector_distance": 0.18532690958162834,
+              "vector_similarity": 0.8146730904183717,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "1e51c628-dad4-44e1-a7cb-88ce135b0269",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "_http._tcp.my-service.my-ns\nto discover\nthe port number for\nhttp\n, as well as the IP address.\nThe Kubernetes DNS server is the only way to access\nExternalName\nServices.\nYou can find more information about\nExternalName\nresolution in\nDNS for Services and Pods\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 63,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "DNS"
+              },
+              "vector_distance": 0.21650991489022686,
+              "vector_similarity": 0.7834900851097731,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "186083a5-e8bc-401d-a595-7f5953f2b63d",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "you can integrate your Kubernetes cluster with a cloud provider.\nExternalName\nMaps the Service to the contents of the\nexternalName\nfield (for example,\nto the hostname\napi.foo.bar.example\n). The mapping configures your cluster's\nDNS server to return a\nCNAME\nrecord with that external hostname value.\nNo proxying of any kind is set up.\nThe\ntype\nfield in the Service API is designed as nested functionality - each level\nadds to the previous. However there is an exception to this nested design. You can\ndefine a\nLoadBalancer\nService by\ndisabling the load balancer\nNodePort\nallocation\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 133,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Service type"
+              },
+              "vector_distance": 0.22050582353822767,
+              "vector_similarity": 0.7794941764617723,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4fd5107a-ef37-4b5e-a2cc-6b966c37c72b",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "A Service of\ntype: ExternalName\naccepts an IPv4 address string,\nbut treats that string as a DNS name comprised of digits,\nnot as an IP address (the internet does not however allow such names in DNS).\nServices with external names that resemble IPv4\naddresses are not resolved by DNS servers.\nIf you want to map a Service directly to a specific IP address, consider using\nheadless Services\n.\nWhen looking up the host\nmy-service.prod.svc.cluster.local\n, the cluster DNS Service\nreturns a\nCNAME\nrecord with the value\nmy.database.example.com\n. Accessing\nmy-service\nworks in the same way as other Services but with the crucial\ndifference that redirection happens at the DNS level rather than via proxying or\nforwarding. Should you later decide to move your database into your cluster, you\ncan start its Pods, add appropriate selectors or endpoints, and change the\nService's\ntype\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 194,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2343256017163754,
+              "vector_similarity": 0.7656743982836246,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "bb8d9f26-f1ff-4212-92d0-d772140c13d9",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "You may have trouble using ExternalName for some common protocols, including HTTP and HTTPS.\nIf you use ExternalName then the hostname used by clients inside your cluster is different from\nthe name that the ExternalName references.\nFor protocols that use hostnames this difference may lead to errors or unexpected responses.\nHTTP requests will have a\nHost:\nheader that the origin server does not recognize;\nTLS servers will not be able to provide a certificate matching the hostname that the client connected to.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 95,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Caution:"
+              },
+              "vector_distance": 0.2440442813648066,
+              "vector_similarity": 0.7559557186351934,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q013": {
+      "vector": {
+        "client_latency_ms": 601.05,
+        "response": {
+          "query": "Which field in the kubelet configuration file should you set to specify the maximum time a local image can remain unused?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 587.036,
+          "results": [
+            {
+              "chunk_id": "ee5c7dc3-ab57-499f-b955-787a82b44aa5",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "You can specify the maximum time a local image can be unused for,\nregardless of disk usage. This is a kubelet setting that you configure for each node.\nTo configure the setting, you need to set a value for the\nimageMaximumGCAge\nfield in the kubelet configuration file.\nThe value is specified as a Kubernetes\nduration\n.\nSee\nduration\nin the glossary\nfor more details.\nFor example, you can set the configuration field to\n12h45m\n,\nwhich means 12 hours and 45 minutes.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 112,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Garbage collection for unused container images"
+              },
+              "vector_distance": 0.17123913764953613,
+              "vector_similarity": 0.8287608623504639,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "379610f5-9997-45a7-90b8-cf49e4031823",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "The\nkubelet\nperforms garbage\ncollection on unused images every five minutes and on unused containers every\nminute. You should avoid using external garbage collection tools, as these can\nbreak the kubelet behavior and remove containers that should exist.\nTo configure options for unused container and image garbage collection, tune the\nkubelet using a\nconfiguration file\nand change the parameters related to garbage collection using the\nKubeletConfiguration\nresource type.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 90,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Garbage collection of unused containers and images"
+              },
+              "vector_distance": 0.24906611442565918,
+              "vector_similarity": 0.7509338855743408,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "5428be4d-aa9d-44d0-95ea-154177dd7661",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "This feature does not track image usage across kubelet restarts. If the kubelet\nis restarted, the tracked image age is reset, causing the kubelet to wait the full\nimageMaximumGCAge\nduration before qualifying images for garbage collection\nbased on image age.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 56,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2590770875857511,
+              "vector_similarity": 0.7409229124142489,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "f3f1228a-7e78-4a65-96e3-ed7564da5ba7",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "Kubernetes manages the lifecycle of all images through its\nimage manager\n,\nwhich is part of the kubelet, with the cooperation of\ncadvisor\n. The kubelet\nconsiders the following disk usage limits when making garbage collection\ndecisions:\nHighThresholdPercent\nLowThresholdPercent\nDisk usage above the configured\nHighThresholdPercent\nvalue triggers garbage\ncollection, which deletes images in order based on the last time they were used,\nstarting with the oldest first. The kubelet deletes images\nuntil disk usage reaches the\nLowThresholdPercent\nvalue.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 113,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container image lifecycle"
+              },
+              "vector_distance": 0.2687753817074111,
+              "vector_similarity": 0.7312246182925889,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "dd04c083-ebf6-4788-b476-19d132e5dc48",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "The kubelet garbage collects unused containers based on the following variables,\nwhich you can define:\nMinAge\n: the minimum age at which the kubelet can garbage collect a\ncontainer. Disable by setting to\n0\n.\nMaxPerPodContainer\n: the maximum number of dead containers each Pod\ncan have. Disable by setting to less than\n0\n.\nMaxContainers\n: the maximum number of dead containers the cluster can have.\nDisable by setting to less than\n0\n.\nIn addition to these variables, the kubelet garbage collects unidentified and\ndeleted containers, typically starting with the oldest first.\nMaxPerPodContainer\nand\nMaxContainers\nmay potentially conflict with each other\nin situations where retaining the maximum number of containers per Pod\n(\nMaxPerPodContainer\n) would go outside the allowable total of global dead\ncontainers (\nMaxContainers\n). In this situation, the kubelet adjusts\nMaxPerPodContainer\nto address the conflict. A worst-case scenario would be to\ndowngrade\nMaxPerPodContainer\nto\n1\nand evict the oldest containers.\nAdditionally, containers owned by pods that have been deleted are removed once\nthey are older than\nMinAge\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 243,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container garbage collection"
+              },
+              "vector_distance": 0.2743414044380188,
+              "vector_similarity": 0.7256585955619812,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q021": {
+      "vector": {
+        "client_latency_ms": 916.791,
+        "response": {
+          "query": "How do you scale Indexed Jobs up or down?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 905.79,
+          "results": [
+            {
+              "chunk_id": "26d9a292-4719-4ccd-8a93-6122288783c9",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Feature state:\nStable\nsince Kubernetes v1.31; enabled by default\nMore information about this feature\nThis is a stable feature in Kubernetes, and has been since version 1.31. It was first available in the v1.27 release.\nYou can scale Indexed Jobs up or down by mutating both\n.spec.parallelism\nand\n.spec.completions\ntogether such that\n.spec.parallelism == .spec.completions\n.\nWhen scaling down, Kubernetes removes the Pods with higher indexes.\nUse cases for elastic Indexed Jobs include batch workloads which require\nscaling an indexed Job, such as MPI, Horovod, Ray, and PyTorch training jobs.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 139,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Elastic Indexed Jobs"
+              },
+              "vector_distance": 0.23221545027402202,
+              "vector_similarity": 0.767784549725978,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4070ee51-a060-4a74-ae2d-62ceb995018a",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "spec\n:\ncompletions\n:\n10\nparallelism\n:\n3\ncompletionMode\n:\nIndexed\n# required for the feature\nbackoffLimitPerIndex\n:\n1\n# maximal number of failures per index\nmaxFailedIndexes\n:\n5\n# maximal number of failed indexes before terminating the Job execution\ntemplate\n:\nspec\n:\nrestartPolicy\n:\nNever\n# required for the feature\ncontainers\n:\n-\nname\n:\nexample\nimage\n:\npython\ncommand\n:\n# The jobs fails as there is at least one failed index\n# (all even indexes fail in here), yet all indexes\n# are executed as maxFailedIndexes is not exceeded.\n-\npython3\n- -\nc\n-\n|\nimport os, sys\nprint(\"Hello world\")\nif int(os.environ.get(\"JOB_COMPLETION_INDEX\")) % 2 == 0:\nsys.exit(1)\nIn the example above, the Job controller allows for one restart for each\nof the indexes. When the total number of failed indexes exceeds 5, then\nthe entire Job is terminated.\nOnce the job is finished, the Job status looks as follows:\nkubectl get -o yaml job job-backoff-limit-per-index-example\nstatus\n:\ncompletedIndexes\n:\n1\n,\n3\n,\n5\n,\n7\n,\n9\nfailedIndexes\n:\n0\n,\n2\n,\n4\n,\n6\n,\n8\nsucceeded\n:\n5\n# 1 succeeded pod for each of 5 succeeded indexes\nfailed\n:\n10\n# 2 failed pods (1 retry) for each of 5 failed indexes\nconditions\n:\n-\nmessage\n:",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 332,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.289036827626038,
+              "vector_similarity": 0.710963172373962,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "006264fc-e80d-40b6-9a6c-c38b5106bfbf",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Feature state:\nStable\nsince Kubernetes v1.33\nMore information about this feature\nThis is a stable feature in Kubernetes, and has been since version v1.33. It was first available in the v1.28 release. You can no longer disable or opt out of this feature or behavior (it is locked); if you explicitly set a value for the associated feature gate\nJobBackoffLimitPerIndex\n, Kubernetes ignores it but does not report any error.\nWhen you run an\nindexed\nJob, you can choose to handle retries\nfor pod failures independently for each index. To do so, set the\n.spec.backoffLimitPerIndex\nto specify the maximal number of pod failures\nper index.\nWhen the per-index backoff limit is exceeded for an index, Kubernetes considers the index as failed and adds it to the\n.status.failedIndexes\nfield. The succeeded indexes, those with a successfully\nexecuted pods, are recorded in the\n.status.completedIndexes\nfield, regardless of whether you set\nthe\nbackoffLimitPerIndex\nfield.\nNote that a failing index does not interrupt execution of other indexes.\nOnce all indexes finish for a Job where you specified a backoff limit per index,\nif at least one of those indexes did fail, the Job controller marks the overall",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 264,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.2897818088531494,
+              "vector_similarity": 0.7102181911468506,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "a0567e90-8bbb-4e62-879a-d094155936dc",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Once all indexes finish for a Job where you specified a backoff limit per index,\nif at least one of those indexes did fail, the Job controller marks the overall\nJob as failed, by setting the Failed condition in the status. The Job gets\nmarked as failed even if some, potentially nearly all, of the indexes were\nprocessed successfully.\nYou can additionally limit the maximal number of indexes marked failed by\nsetting the\n.spec.maxFailedIndexes\nfield.\nWhen the number of failed indexes exceeds the\nmaxFailedIndexes\nfield, the\nJob controller triggers termination of all remaining running Pods for that Job.\nOnce all pods are terminated, the entire Job is marked failed by the Job\ncontroller, by setting the Failed condition in the Job status.\nHere is an example manifest for a Job that defines a\nbackoffLimitPerIndex\n:\n/controllers/job-backoff-limit-per-index-example.yaml\napiVersion\n:\nbatch/v1\nkind\n:\nJob\nmetadata\n:\nname\n:\njob-backoff-limit-per-index-example\nspec\n:\ncompletions\n:\n10\nparallelism\n:\n3\ncompletionMode\n:\nIndexed\n# required for the feature\nbackoffLimitPerIndex\n:\n1\n# maximal number of failures per index\nmaxFailedIndexes\n:\n5",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 258,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.2930932641029358,
+              "vector_similarity": 0.7069067358970642,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "96cc1923-06ef-43f0-9d6b-b6a68de9b1c6",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "When the\nWorkloadWithJob\nfeature gate is enabled and a Job uses\ngang scheduling\n,\nthe gang size follows the mutable\nschedulingPolicy.gang.minCount\n(or\n.spec.parallelism\nwhen\nminCount\nis unset).\nYou can scale the gang in one of two ways:\nset\n.spec.scheduling.schedulingPolicy.gang.minCount\ndirectly, or\nchange\n.spec.parallelism\nwhen\nminCount\nis unset.\nOn either change, the controller recompiles the\nWorkload\nand re-syncs the\nPodGroup\nsize, rescaling the gang in place without recreating the Job. Updates\napply only to Pods evaluated in future scheduling cycles and do not affect\nalready-scheduled Pods. A\ngang.minCount\ngreater than\n.spec.parallelism\nis\nrejected, since such a gang can never be satisfied.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 177,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2994538336829491,
+              "vector_similarity": 0.7005461663170509,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q042": {
+      "vector": {
+        "client_latency_ms": 910.824,
+        "response": {
+          "query": "What happens by default to dependent objects when Kubernetes deletes an owner object?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 893.094,
+          "results": [
+            {
+              "chunk_id": "fd3198ac-31f5-4600-aabd-1a8fb14c3acf",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "When Kubernetes deletes an owner object, the dependents left behind are called\norphan\nobjects. By default, Kubernetes deletes dependent objects. To learn how\nto override this behaviour, see\nDelete owner objects and orphan dependents\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 48,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Orphaned dependents"
+              },
+              "vector_distance": 0.16857898235321045,
+              "vector_similarity": 0.8314210176467896,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "15ac9868-d1a4-462e-8599-35a0779cd4c4",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "Kubernetes checks for and deletes objects that no longer have owner\nreferences, like the pods left behind when you delete a ReplicaSet. When you\ndelete an object, you can control whether Kubernetes deletes the object's\ndependents automatically, in a process called\ncascading deletion\n. There are\ntwo types of cascading deletion, as follows:\nForeground cascading deletion\nBackground cascading deletion\nYou can also control how and when garbage collection deletes resources that have\nowner references using Kubernetes\nfinalizers\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 105,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Cascading deletion"
+              },
+              "vector_distance": 0.19388799703788628,
+              "vector_similarity": 0.8061120029621137,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "f7348113-2ed2-4413-a6d4-7d256b7db740",
+              "document_id": "43cb9ac4-c82f-4e3f-9691-fb17cb0831a0",
+              "filename": "overview--working-with-objects--owners-dependents.html",
+              "content": "Dependent objects have a\nmetadata.ownerReferences\nfield that references their\nowner object. A valid owner reference consists of the object name and a\nUID\nwithin the same\nnamespace\nas the dependent object. Kubernetes sets the value of\nthis field automatically for objects that are dependents of other objects like\nReplicaSets, DaemonSets, Deployments, Jobs and CronJobs, and ReplicationControllers.\nYou can also configure these relationships manually by changing the value of\nthis field. However, you usually don't need to and can allow Kubernetes to\nautomatically manage the relationships.\nDependent objects also have an\nownerReferences.blockOwnerDeletion\nfield that\ntakes a boolean value and controls whether specific dependents can block garbage\ncollection from deleting their owner object. Kubernetes automatically sets this\nfield to\ntrue\nif a\ncontroller\n(for example, the Deployment controller) sets the value of the\nmetadata.ownerReferences\nfield. You can also set the value of the\nblockOwnerDeletion\nfield manually to control which dependents block garbage\ncollection.\nA Kubernetes admission controller controls user access to change this field for",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--owners-dependents.html",
+                "token_count": 229,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Owner references in object specifications"
+              },
+              "vector_distance": 0.1978958963093681,
+              "vector_similarity": 0.8021041036906319,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "604e3bc6-7808-4856-ae28-95796ddfca41",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "In background cascading deletion, the Kubernetes API server deletes the owner\nobject immediately and the garbage collector controller (custom or default)\ncleans up the dependent objects in the background.\nIf a finalizer exists, it ensures that objects are not deleted until all necessary clean-up tasks are completed.\nBy default, Kubernetes uses background cascading deletion unless\nyou manually use foreground deletion or choose to orphan the dependent objects.\nSee\nUse background cascading deletion\nto learn more.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 94,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Background cascading deletion"
+              },
+              "vector_distance": 0.21059732373968676,
+              "vector_similarity": 0.7894026762603132,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "8008671d-f79f-4d7b-b94e-e2b9f3494ff7",
+              "document_id": "a15fd9d8-ace6-4364-8caa-7d947a8d3dc4",
+              "filename": "architecture--garbage-collection.html",
+              "content": "Many objects in Kubernetes link to each other through\nowner references\n.\nOwner references tell the control plane which objects are dependent on others.\nKubernetes uses owner references to give the control plane, and other API\nclients, the opportunity to clean up related resources before deleting an\nobject. In most cases, Kubernetes manages owner references automatically.\nOwnership is different from the\nlabels and selectors\nmechanism that some resources also use. For example, consider a\nService\nthat creates\nEndpointSlice\nobjects. The Service uses\nlabels\nto allow the control plane to\ndetermine which\nEndpointSlice\nobjects are used for that Service. In addition\nto the labels, each\nEndpointSlice\nthat is managed on behalf of a Service has\nan owner reference. Owner references help different parts of Kubernetes avoid\ninterfering with objects they don’t control.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--garbage-collection.html",
+                "token_count": 174,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Owners and dependents"
+              },
+              "vector_distance": 0.21459280165476646,
+              "vector_similarity": 0.7854071983452335,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q043": {
+      "vector": {
+        "client_latency_ms": 1007.914,
+        "response": {
+          "query": "What optional component maintains network rules on nodes to implement Services?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 990.293,
+          "results": [
+            {
+              "chunk_id": "181e92a1-e90d-4c9a-a7e7-b68a59267c3a",
+              "document_id": "d887fee5-be63-4e15-93df-816450ca5e21",
+              "filename": "overview--components.html",
+              "content": "Run on every node, maintaining running pods and providing the Kubernetes runtime environment:\nkubelet\nEnsures that Pods are running, including their containers.\nkube-proxy\n(optional)\nMaintains network rules on nodes to implement\nServices\n.\nContainer runtime\nSoftware responsible for running containers. Read\nContainer Runtimes\nto learn more.\n🛇 This item links to a third party project or product that is not part of Kubernetes itself.\nMore information\nYour cluster may require additional software on each node; for example, you might also\nrun\nsystemd\non a Linux node to supervise local components.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--components.html",
+                "token_count": 121,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node Components"
+              },
+              "vector_distance": 0.2868937637476251,
+              "vector_similarity": 0.7131062362523749,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "972b79f7-79c0-453a-be40-e202b0bcae68",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "match its selector, and then makes any necessary updates to the set of\nEndpointSlices for the Service.\nThe name of a Service object must be a valid\nRFC 1123 label name\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 41,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Defining a Service"
+              },
+              "vector_distance": 0.2910751700401306,
+              "vector_similarity": 0.7089248299598694,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "8f4d082c-c9f4-4758-bbf6-516cbf1260c7",
+              "document_id": "172e1343-63d2-49b0-8bd4-4752414ba8a2",
+              "filename": "services-networking--network-policies.html",
+              "content": "Network policies are implemented by the\nnetwork plugin\n.\nTo use network policies, you must be using a networking solution which supports NetworkPolicy.\nCreating a NetworkPolicy resource without a controller that implements it will have no effect.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--network-policies.html",
+                "token_count": 44,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Prerequisites"
+              },
+              "vector_distance": 0.2988354563713074,
+              "vector_similarity": 0.7011645436286926,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "64d5a4b3-a317-4cce-a978-3a718b9f98be",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "selectors\n.\nIf your workload speaks HTTP, you might choose to use an\nIngress\nto control how web traffic\nreaches that workload.\nIngress is not a Service type, but it acts as the entry point for your\ncluster. An Ingress lets you consolidate your routing rules into a single resource, so\nthat you can expose multiple components of your workload, running separately in your\ncluster, behind a single listener.\nThe\nGateway\nAPI for Kubernetes\nprovides extra capabilities beyond Ingress and Service. You can add Gateway to your cluster -\nit is a family of extension APIs, implemented using\nCustomResourceDefinitions\n-\nand then use these to configure access to network services that are running in your cluster.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 147,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Services in Kubernetes"
+              },
+              "vector_distance": 0.3026803912329895,
+              "vector_similarity": 0.6973196087670105,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "f79110a4-6d0a-4c59-8596-d33760bf8bd9",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "for more information.\nWhen using\nnftables\nmode, NodePort Services will be available on localhost when the\nKubeProxyNFTablesLocalhostNodePorts\nfeature gate is enabled, and\n--nodeport-addresses\nis set to a value that explicitly includes\nlocalhost\n.\n(Setting it to just\nall\nwill\nnot\nenable localhost NodePort Services.) This is\nimplemented by redirecting localhost NodePort connections through a userspace proxy,\nso it is not as efficient as ordinary service proxying.\nThird-party network plugins that have their own service proxy implementations may or may\nnot support localhost NodePorts; consult the documentation for those plugins.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 134,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "type: NodePort Services via localhost"
+              },
+              "vector_distance": 0.30603371226586507,
+              "vector_similarity": 0.6939662877341349,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q051": {
+      "vector": {
+        "client_latency_ms": 922.879,
+        "response": {
+          "query": "What type of pods tolerate being run on an unschedulable Node?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 902.298,
+          "results": [
+            {
+              "chunk_id": "0fe190d6-d4ee-4df4-ac92-96e72a682319",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "Pods that are part of a\nDaemonSet\ntolerate\nbeing run on an unschedulable Node. DaemonSets typically provide node-local services\nthat should run on the Node even if it is being drained of workload applications.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 48,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.17906866011228106,
+              "vector_similarity": 0.8209313398877189,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "198be42e-5a9a-4963-878a-edaffa464304",
+              "document_id": "2722efeb-41a7-4a0e-8de3-7e7254da9f4e",
+              "filename": "workloads--controllers--daemonset.html",
+              "content": "node.kubernetes.io/network-unavailable\nNoSchedule\nOnly added for DaemonSet Pods that request host networking\n, i.e., Pods having\nspec.hostNetwork: true\n. Such DaemonSet Pods can be scheduled onto nodes with unavailable network.\nYou can add your own tolerations to the Pods of a DaemonSet as well, by\ndefining these in the Pod template of the DaemonSet.\nBecause the DaemonSet controller sets the\nnode.kubernetes.io/unschedulable:NoSchedule\ntoleration automatically,\nKubernetes can run DaemonSet Pods on nodes that are marked as\nunschedulable\n.\nIf you use a DaemonSet to provide an important node-level function, such as\ncluster networking\n, it is\nhelpful that Kubernetes places DaemonSet Pods on nodes before they are ready.\nFor example, without that special toleration, you could end up in a deadlock\nsituation where the node is not marked as ready because the network plugin is\nnot running there, and at the same time the network plugin is not running on\nthat node because the node is not yet ready.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--daemonset.html",
+                "token_count": 224,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Taints and tolerations"
+              },
+              "vector_distance": 0.22971266508102417,
+              "vector_similarity": 0.7702873349189758,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "36374d30-bcf9-4218-948b-c86169a66f63",
+              "document_id": "2722efeb-41a7-4a0e-8de3-7e7254da9f4e",
+              "filename": "workloads--controllers--daemonset.html",
+              "content": "The DaemonSet controller automatically adds a set of\ntolerations\nto DaemonSet Pods:\nTolerations for DaemonSet pods\nToleration key\nEffect\nDetails\nnode.kubernetes.io/not-ready\nNoExecute\nDaemonSet Pods can be scheduled onto nodes that are not healthy or ready to accept Pods. Any DaemonSet Pods running on such nodes will not be evicted.\nnode.kubernetes.io/unreachable\nNoExecute\nDaemonSet Pods can be scheduled onto nodes that are unreachable from the node controller. Any DaemonSet Pods running on such nodes will not be evicted.\nnode.kubernetes.io/disk-pressure\nNoSchedule\nDaemonSet Pods can be scheduled onto nodes with disk pressure issues.\nnode.kubernetes.io/memory-pressure\nNoSchedule\nDaemonSet Pods can be scheduled onto nodes with memory pressure issues.\nnode.kubernetes.io/pid-pressure\nNoSchedule\nDaemonSet Pods can be scheduled onto nodes with process pressure issues.\nnode.kubernetes.io/unschedulable\nNoSchedule\nDaemonSet Pods can be scheduled onto nodes that are unschedulable.\nnode.kubernetes.io/network-unavailable\nNoSchedule\nOnly added for DaemonSet Pods that request host networking\n, i.e., Pods having\nspec.hostNetwork: true",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--daemonset.html",
+                "token_count": 251,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Taints and tolerations"
+              },
+              "vector_distance": 0.2337283492088318,
+              "vector_similarity": 0.7662716507911682,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4870434c-9956-4e68-812e-0f23d1ac10bc",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Because the Pod template specifies a\nrestartPolicy: Never\n,\nthe kubelet does not restart the\nmain\ncontainer in that particular Pod.\nThe second rule of the Pod failure policy, specifying the\nIgnore\naction for\nfailed Pods with condition\nDisruptionTarget\nexcludes Pod disruptions from\nbeing counted towards the\n.spec.backoffLimit\nlimit of retries.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 75,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2793860005966412,
+              "vector_similarity": 0.7206139994033588,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "0a81aac9-602f-4a58-88fd-0de10d43cb81",
+              "document_id": "42fe712e-8aca-426e-ba05-fc18c2e7b66b",
+              "filename": "workloads--pods--pod-lifecycle.html",
+              "content": "; if Kubernetes isn't able to start the Pod on the selected\nnode (for example, if the node crashes before the Pod starts), then that particular Pod\nnever starts.\nYou can use\nPod Scheduling Readiness\nto delay scheduling for a Pod until all its\nscheduling gates\nare removed. For example,\nyou might want to define a set of Pods but only trigger scheduling once all the Pods\nhave been created.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods--pod-lifecycle.html",
+                "token_count": 88,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Pod lifetime"
+              },
+              "vector_distance": 0.2807939481261986,
+              "vector_similarity": 0.7192060518738014,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q056": {
+      "vector": {
+        "client_latency_ms": 516.937,
+        "response": {
+          "query": "What is the intended delivery guarantee for container lifecycle hooks?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 498.407,
+          "results": [
+            {
+              "chunk_id": "3343b283-c73c-4376-b4cc-2d6a48299246",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "Hook delivery is intended to be\nat least once\n,\nwhich means that a hook may be called multiple times for any given event,\nsuch as for\nPostStart\nor\nPreStop\n.\nIt is up to the hook implementation to handle this correctly.\nGenerally, only single deliveries are made.\nIf, for example, an HTTP hook receiver is down and is unable to take traffic,\nthere is no attempt to resend.\nIn some rare cases, however, double delivery may occur.\nFor instance, if a kubelet restarts in the middle of sending a hook,\nthe hook might be resent after the kubelet comes back up.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 127,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Hook delivery guarantees"
+              },
+              "vector_distance": 0.17858629035231055,
+              "vector_similarity": 0.8214137096476894,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "0b2679b9-89d1-47f0-ab7b-93ceb6ba8ce3",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "When a Container lifecycle management hook is called,\nthe Kubernetes management system executes the handler according to the hook action,\nhttpGet\n,\ntcpSocket\n(\ndeprecated\n)\nand\nsleep\nare executed by the kubelet process, and\nexec\nis executed in the container.\nThe\nPostStart\nhook handler call is initiated when a container is created,\nmeaning the container ENTRYPOINT and the\nPostStart\nhook are triggered simultaneously.\n(This means it generally doesn't make sense to use an HTTP hook for\nPostStart\n, since\nthere is no guarantee that the container's process will have fully started up when the\nhook runs.)\nIf the\nPostStart\nhook takes too long to execute or if it hangs,\nit can prevent the container from transitioning to a\nrunning\nstate.\nPreStop\nhooks are not executed asynchronously from the signal to stop the Container; the hook must\ncomplete its execution before the TERM signal can be sent. If a\nPreStop\nhook hangs during\nexecution, the Pod's phase will be\nTerminating\nand remain there until the Pod is killed after its\nterminationGracePeriodSeconds\nexpires. This grace period applies to the total time it takes for\nboth the\nPreStop",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 247,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Hook handler execution"
+              },
+              "vector_distance": 0.23511978283167223,
+              "vector_similarity": 0.7648802171683278,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "e57cdcac-c410-4c42-a050-45e06a0eba0f",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "While the hook runs concurrently with the container process,\nit can delay container status updates;\nthe container may not transition to\nRunning\nuntil the hook completes.\nPreStop\nThis hook is called immediately before a container is terminated due to an API request or management\nevent such as a liveness/startup probe failure, preemption, resource contention and others. A call\nto the\nPreStop\nhook fails if the container is already in a terminated or completed state and the\nhook must complete before the TERM signal to stop the container can be sent. The Pod's termination\ngrace period countdown begins before the\nPreStop\nhook is executed, so regardless of the outcome of\nthe handler, the container will eventually terminate within the Pod's termination grace period. No\nparameters are passed to the handler.\nA more detailed description of the termination behavior can be found in\nTermination of Pods\n.\nStopSignal\nThe StopSignal lifecycle can be used to define a stop signal which would be sent to the container when it is\nstopped. If you set this, it overrides any\nSTOPSIGNAL\ninstruction defined within the container image.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 230,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.23573092328700163,
+              "vector_similarity": 0.7642690767129984,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "822e8956-d44f-4ae8-84d1-82826693c71a",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "Containers can access a hook by implementing and registering a handler for that hook.\nThere are three types of hook handlers that can be implemented for Containers:\nExec - Executes a specific command, such as\npre-stop.sh\n, inside the cgroups and namespaces of the Container.\nResources consumed by the command are counted against the Container.\nHTTP - Executes an HTTP request against a specific endpoint on the Container.\nSleep - Pauses the container for a specified duration.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 90,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Hook handler implementations"
+              },
+              "vector_distance": 0.24630437035275576,
+              "vector_similarity": 0.7536956296472442,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "963f9f4d-a52e-4748-98e9-b0c9917530dd",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "There are two hooks that are exposed to Containers:\nPostStart\nThis hook is executed immediately after a container is created.\nIt runs\nconcurrently\nwith the container's\nENTRYPOINT\n(main process),\nmeaning the hook may run before, during, or after the main process starts.\nNo parameters are passed to the handler.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 65,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container hooks"
+              },
+              "vector_distance": 0.2503567636438313,
+              "vector_similarity": 0.7496432363561687,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q065": {
+      "vector": {
+        "client_latency_ms": 587.027,
+        "response": {
+          "query": "How can you ensure that Kubernetes runs a Pod using a particular container runtime when using more than one runtime in your cluster?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 567.46,
+          "results": [
+            {
+              "chunk_id": "95daa8cf-2b65-484f-8899-060c5e66222f",
+              "document_id": "29edfe32-e301-4c73-9ef0-923d4de8d115",
+              "filename": "containers.html",
+              "content": "A fundamental component that empowers Kubernetes to run containers effectively.\nIt is responsible for managing the execution and lifecycle of containers within the Kubernetes environment.\nKubernetes supports container runtimes such as\ncontainerd\n,\nCRI-O\n,\nand any other implementation of the\nKubernetes CRI (Container Runtime\nInterface)\n.\nUsually, you can allow your cluster to pick the default container runtime\nfor a Pod. If you need to use more than one container runtime in your cluster,\nyou can specify the\nRuntimeClass\nfor a Pod to make sure that Kubernetes runs those containers using a\nparticular container runtime.\nYou can also use RuntimeClass to run different Pods with the same container\nruntime but with different settings.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers.html",
+                "token_count": 144,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container runtimes"
+              },
+              "vector_distance": 0.24462342262268066,
+              "vector_similarity": 0.7553765773773193,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "69e728f2-1e6e-4d66-bd0b-2b95ff9b35f9",
+              "document_id": "1856b7a6-8645-4789-aafa-426d676fd5df",
+              "filename": "containers--images.html",
+              "content": "Feature state:\nAlpha\nsince Kubernetes v1.29; disabled by default\nMore information about this feature\nTo use this feature, you (or a cluster administrator) will need to enable the\nRuntimeClassInImageCriApi\nfeature gate for all relevant components in your cluster.\nSee\nEnable Or Disable Feature Gates\nfor more information.\nKubernetes includes alpha support for performing image pulls based on the RuntimeClass of a Pod.\nIf you enable the\nRuntimeClassInImageCriApi\nfeature gate\n,\nthe kubelet references container images by a tuple of image name and runtime handler\nrather than just the image name or digest. Your\ncontainer runtime\nmay adapt its behavior based on the selected runtime handler.\nPulling images based on runtime class is useful for VM-based containers, such as\nWindows Hyper-V containers.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--images.html",
+                "token_count": 166,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Image pull per runtime class"
+              },
+              "vector_distance": 0.2700732946395874,
+              "vector_similarity": 0.7299267053604126,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "6e349b17-86de-4b12-8949-3a72c0f48b0c",
+              "document_id": "16cd6420-7062-4833-9463-898f123c6308",
+              "filename": "workloads--pods.html",
+              "content": "You need to install a\ncontainer runtime\ninto each node in the cluster so that Pods can run there.\nThe shared context of a Pod is a set of Linux namespaces, cgroups, and\npotentially other facets of isolation - the same things that isolate a\ncontainer\n. Within a Pod's context, the individual applications may have\nfurther sub-isolations applied.\nA Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.\nPods in a Kubernetes cluster are used in two main ways:\nPods that run a single container\n. The \"one-container-per-Pod\" model is the\nmost common Kubernetes use case; in this case, you can think of a Pod as a\nwrapper around a single container; Kubernetes manages Pods rather than managing\nthe containers directly.\nPods that run multiple containers that need to work together\n. A Pod can\nencapsulate an application composed of\nmultiple co-located containers\nthat are\ntightly coupled and need to share resources. These co-located containers\nform a single cohesive unit.\nGrouping multiple co-located and co-managed containers in a single Pod is a\nrelatively advanced use case. You should use this pattern only in specific",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods.html",
+                "token_count": 251,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.27667325735092163,
+              "vector_similarity": 0.7233267426490784,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "5dc45016-b1dd-485e-af14-32e18fe261c0",
+              "document_id": "16cd6420-7062-4833-9463-898f123c6308",
+              "filename": "workloads--pods.html",
+              "content": "Feature state:\nStable\nsince Kubernetes v1.25\nYou should set the\n.spec.os.name\nfield to either\nwindows\nor\nlinux\nto indicate the\noperating system that the containers in that Pod require. These two are the only operating\nsystems supported for now by Kubernetes. In the future, this list may be expanded.\nThe kubelet refuses to run a Pod if the value of\n.spec.os.name\ndoes not match the\noperating system of the node. However, in Kubernetes\nv1.37, the value of\n.spec.os.name\ndoes not affect\nhow the\nkube-scheduler\npicks a node for the Pod to run on. In any cluster where there is more than one operating system for\nrunning nodes, you should set the\nkubernetes.io/os\nlabel correctly on each node, and define pods with a\nnodeSelector\nbased on the operating system\nlabel. If you do not specify an OS-based\nnodeSelector\n, the kube-scheduler may assign the Pod\nto a node whose OS is unsuitable for its containers.\nThe\nPod security standards\nalso use the\n.spec.os.name\nfield to avoid enforcing policies that aren't relevant to the operating system.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods.html",
+                "token_count": 251,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Pod OS"
+              },
+              "vector_distance": 0.2956923246383667,
+              "vector_similarity": 0.7043076753616333,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "2f83db0e-824c-48e4-8d1c-fec870bd3a3c",
+              "document_id": "42fe712e-8aca-426e-ba05-fc18c2e7b66b",
+              "filename": "workloads--pods--pod-lifecycle.html",
+              "content": "While a Pod is running, the kubelet is able to restart containers to handle\nsome kind of faults. Within a Pod, Kubernetes tracks different container\nstates\nand determines what action to take to make the Pod\nhealthy again. This is done in a\npolling\nloop\nthat periodically reconciles the\ndesired state (a Pod spec) with the actual state of the running containers.\nIn the Kubernetes API, Pods have both a specification and an actual status. The\nstatus for a Pod object consists of a set of\nPod conditions\n.\nYou can also inject\ncustom readiness information\ninto the\ncondition data for a Pod, if that is useful to your application.\nPods are only\nscheduled\nonce in their lifetime;\nassigning a Pod to a specific node is called\nbinding\n, and the process of selecting\nwhich node to use is called\nscheduling\n.\nOnce a Pod has been scheduled and is bound to a node, Kubernetes tries\nto run that Pod on the node. The Pod runs on that node until it stops, or until the Pod\nis\nterminated\n; if Kubernetes isn't able to start the Pod on the selected\nnode (for example, if the node crashes before the Pod starts), then that particular Pod\nnever starts.\nYou can use\nPod Scheduling Readiness",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods--pod-lifecycle.html",
+                "token_count": 269,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Pod lifetime"
+              },
+              "vector_distance": 0.30120609395467546,
+              "vector_similarity": 0.6987939060453245,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q066": {
+      "vector": {
+        "client_latency_ms": 489.4,
+        "response": {
+          "query": "Which operators are supported for use with field selectors?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 469.869,
+          "results": [
+            {
+              "chunk_id": "eeac96b8-535b-47ed-ad49-f9df07cab5ac",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "Set-based operators\n(\nin\n,\nnotin\n,\nexists\n) are not supported for field selectors.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 21,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.19653468152673803,
+              "vector_similarity": 0.803465318473262,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "631f8db2-3c33-4bd8-9e48-e593eadfd5c3",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "You can use the\n=\n,\n==\n, and\n!=\noperators with field selectors (\n=\nand\n==\nmean the same thing). This\nkubectl\ncommand, for example, selects all Kubernetes Services that aren't in the\ndefault\nnamespace:\nkubectl get services  --all-namespaces --field-selector metadata.namespace!\n=\ndefault",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 66,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Supported operators"
+              },
+              "vector_distance": 0.23680654873867446,
+              "vector_similarity": 0.7631934512613255,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "cf9a1ab3-b6a2-4c57-95bd-18d60436d206",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "As with\nlabel\nand other selectors, field selectors can be chained together as a comma-separated list. This\nkubectl\ncommand selects all Pods for which the\nstatus.phase\ndoes not equal\nRunning\nand the\nspec.restartPolicy\nfield equals\nAlways\n:\nkubectl get pods --field-selector\n=\nstatus.phase!\n=\nRunning,spec.restartPolicy\n=\nAlways",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 75,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Chained selectors"
+              },
+              "vector_distance": 0.24528348445892334,
+              "vector_similarity": 0.7547165155410767,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "6306c29e-7adc-4456-8bc3-0b2991dfa0d6",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "Field selectors\nlet you select Kubernetes\nobjects\nbased on the\nvalue of one or more resource fields. Here are some examples of field selector queries:\nmetadata.name=my-service\nmetadata.namespace!=default\nstatus.phase=Pending\nThis\nkubectl\ncommand selects all Pods for which the value of the\nstatus.phase\nfield is\nRunning\n:\nkubectl get pods --field-selector status.phase\n=\nRunning",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 81,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Field Selectors"
+              },
+              "vector_distance": 0.24890266365392888,
+              "vector_similarity": 0.7510973363460711,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "af62bd3f-a38e-4d28-b3db-65b0820077be",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "Supported field selectors vary by Kubernetes resource type. All resource types support the\nmetadata.name\nand\nmetadata.namespace\nfields. Using unsupported field selectors produces an error. For example:\nkubectl get ingress --field-selector foo.bar\n=\nbaz\nError from server (BadRequest): Unable to find \"ingresses\" that match label selector \"\", field selector \"foo.bar=baz\": \"foo.bar\" is not a known field selector: only \"metadata.name\", \"metadata.namespace\"",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 94,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Supported fields"
+              },
+              "vector_distance": 0.2586162532200649,
+              "vector_similarity": 0.7413837467799351,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q072": {
+      "vector": {
+        "client_latency_ms": 634.755,
+        "response": {
+          "query": "According to the supplied Kubernetes Service documentation, since which version is externalIPs deprecated, and what alternatives are recommended?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 613.017,
+          "results": [
+            {
+              "chunk_id": "eaf50e34-34e7-4b49-b890-7d2318e847bb",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Feature state:\nDeprecated\nsince Kubernetes v1.36\nAll users should begin migrating away from\nexternalIPs\n.\nConsider using an external load balancer controller or a Gateway API\nimplementation instead.\nIf there are external IPs that route to one or more cluster nodes, Kubernetes Services\ncan be exposed on those\nexternalIPs\n. When network traffic arrives into the cluster, with\nthe external IP (as destination IP) and the port matching that Service, rules and routes\nthat Kubernetes has configured ensure that the traffic is routed to one of the endpoints\nfor that Service.\nWhen you define a Service, you can specify\nexternalIPs\nfor any\nservice type\n.\nIn the example below, the Service named\n\"my-service\"\ncan be accessed by clients using TCP,\non\n\"198.51.100.32:80\"\n(calculated from\n.spec.externalIPs[]\nand\n.spec.ports[].port\n).\napiVersion\n:\nv1\nkind\n:\nService\nmetadata\n:\nname\n:\nmy-service\nspec\n:\nselector\n:\napp.kubernetes.io/name\n:\nMyApp\nports\n:\n-\nname\n:\nhttp\nprotocol\n:\nTCP\nport\n:\n80\ntargetPort\n:\n49152\nexternalIPs\n:\n-\n198.51.100.32",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 267,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "External IPs"
+              },
+              "vector_distance": 0.21277377643507023,
+              "vector_similarity": 0.7872262235649298,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "47911a7d-ce8d-435f-9420-69e356218530",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "The\n.spec.loadBalancerIP\nfield for a Service was deprecated in Kubernetes v1.24.\nThis field was under-specified and its meaning varies across implementations.\nIt also cannot support dual-stack networking. This field may be removed in a future API version.\nIf you're integrating with a provider that supports specifying the load balancer IP address(es)\nfor a Service via a (provider specific) annotation, you should switch to doing that.\nIf you are writing code for a load balancer integration with Kubernetes, avoid using this field.\nYou can integrate with\nGateway\nrather than Service, or you\ncan define your own (provider specific) annotations on the Service that specify the equivalent detail.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 139,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2243065371696077,
+              "vector_similarity": 0.7756934628303923,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "c6fa2088-4ddf-4049-bbda-4fd912554b5d",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Feature state:\nDeprecated\nsince Kubernetes v1.33\nThe EndpointSlice API is the evolution of the older\nEndpoints\nAPI. The deprecated Endpoints API has several problems relative to\nEndpointSlice:\nIt does not support dual-stack clusters.\nIt does not contain information needed to support newer features, such as\ntrafficDistribution\n.\nIt will truncate the list of endpoints if it is too long to fit in a single object.\nBecause of this, it is recommended that all clients use the\nEndpointSlice API rather than Endpoints.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 107,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Endpoints (deprecated)"
+              },
+              "vector_distance": 0.2512099519732577,
+              "vector_similarity": 0.7487900480267423,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "d2a32b10-ea3d-47aa-8742-17f1bf3e9b55",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "For some parts of your application (for example, frontends) you may want to expose a\nService onto an external IP address, one that's accessible from outside of your\ncluster.\nKubernetes Service types allow you to specify what kind of Service you want.\nThe available\ntype\nvalues and their behaviors are:\nClusterIP\nExposes the Service on a cluster-internal IP. Choosing this value\nmakes the Service only reachable from within the cluster. This is the\ndefault that is used if you don't explicitly specify a\ntype\nfor a Service.\nYou can expose the Service to the public internet using an\nIngress\nor a\nGateway\n.\nNodePort\nExposes the Service on each Node's IP at a static port (the\nNodePort\n).\nTo make the node port available, Kubernetes sets up a cluster IP address,\nthe same as if you had requested a Service of\ntype: ClusterIP\n.\nLoadBalancer\nExposes the Service externally using an external load balancer. Kubernetes\ndoes not directly offer a load balancing component; you must provide one, or\nyou can integrate your Kubernetes cluster with a cloud provider.\nExternalName\nMaps the Service to the contents of the\nexternalName\nfield (for example,\nto the hostname\napi.foo.bar.example",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 262,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Service type"
+              },
+              "vector_distance": 0.26439938737152147,
+              "vector_similarity": 0.7356006126284785,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "7ea085d2-75eb-48ab-b2a8-eed755a5d0a5",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Kubernetes does not manage allocation of\nexternalIPs\n; these are the responsibility\nof the cluster administrator.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 23,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.2646983204512283,
+              "vector_similarity": 0.7353016795487717,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q077": {
+      "vector": {
+        "client_latency_ms": 897.102,
+        "response": {
+          "query": "What reclaim policy must dynamically provisioned PersistentVolumes have for Kubernetes garbage collection to clean them up?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 877.287,
+          "results": [
+            {
+              "chunk_id": "5b1b388b-b583-4fca-a364-c7fd129b5cf6",
+              "document_id": "8ca02da5-ba53-460e-a620-268a11259ad1",
+              "filename": "storage--persistent-volumes.html",
+              "content": "For volume plugins that support the\nDelete\nreclaim policy, deletion removes\nboth the PersistentVolume object from Kubernetes, as well as the associated\nstorage asset in the external infrastructure. Volumes that were dynamically provisioned\ninherit the\nreclaim policy of their StorageClass\n, which\ndefaults to\nDelete\n. The administrator should configure the StorageClass\naccording to users' expectations; otherwise, the PV must be edited or\npatched after it is created. See\nChange the Reclaim Policy of a PersistentVolume\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "storage--persistent-volumes.html",
+                "token_count": 108,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Delete"
+              },
+              "vector_distance": 0.20125327114025526,
+              "vector_similarity": 0.7987467288597447,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "14364337-c52e-484b-beeb-2ac172b46d52",
+              "document_id": "8ca02da5-ba53-460e-a620-268a11259ad1",
+              "filename": "storage--persistent-volumes.html",
+              "content": "The\nRecycle\nreclaim policy is deprecated. Instead, the recommended approach\nis to use dynamic provisioning.\nIf supported by the underlying volume plugin, the\nRecycle\nreclaim policy performs\na basic scrub (\nrm -rf /thevolume/*\n) on the volume and makes it available again for a new claim.\nHowever, an administrator can configure a custom recycler Pod template using\nthe Kubernetes controller manager command line arguments as described in the\nreference\n.\nThe custom recycler Pod template must contain a\nvolumes\nspecification, as\nshown in the example below:\napiVersion\n:\nv1\nkind\n:\nPod\nmetadata\n:\nname\n:\npv-recycler\nnamespace\n:\ndefault\nspec\n:\nrestartPolicy\n:\nNever\nvolumes\n:\n-\nname\n:\nvol\nhostPath\n:\npath\n:\n/any/path/it/will/be/replaced\ncontainers\n:\n-\nname\n:\npv-recycler\nimage\n:\n\"registry.k8s.io/busybox\"\ncommand\n:\n[\n\"/bin/sh\"\n,\n\"-c\"\n,\n\"test -e /scrub && rm -rf /scrub/..?* /scrub/.[!.]* /scrub/*  && test -z \\\"$(ls -A /scrub)\\\" || exit 1\"\n]\nvolumeMounts\n:\n-\nname\n:\nvol\nmountPath\n:\n/scrub\nHowever, the particular path specified in the custom recycler Pod template in the\nvolumes\npart is replaced with the particular path of the volume that is being recycled.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "storage--persistent-volumes.html",
+                "token_count": 323,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Warning:"
+              },
+              "vector_distance": 0.2045246484592348,
+              "vector_similarity": 0.7954753515407652,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "b69da3e8-185c-42d2-9f0b-c05be01fb150",
+              "document_id": "8ca02da5-ba53-460e-a620-268a11259ad1",
+              "filename": "storage--persistent-volumes.html",
+              "content": "When a user is done with their volume, they can delete the PVC objects from the\nAPI that allows reclamation of the resource. The reclaim policy for a PersistentVolume\ntells the cluster what to do with the volume after it has been released of its claim.\nCurrently, volumes can either be Retained, Recycled, or Deleted.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "storage--persistent-volumes.html",
+                "token_count": 69,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Reclaiming"
+              },
+              "vector_distance": 0.205184197580343,
+              "vector_similarity": 0.794815802419657,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "893df24f-2fa5-41d3-a38e-e473f40439fe",
+              "document_id": "8ca02da5-ba53-460e-a620-268a11259ad1",
+              "filename": "storage--persistent-volumes.html",
+              "content": "Current reclaim policies are:\nRetain -- manual reclamation\nRecycle -- basic scrub (\nrm -rf /thevolume/*\n)\nDelete -- delete the volume\nFor Kubernetes 1.37, only\nnfs\nand\nhostPath\nvolume types support recycling.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "storage--persistent-volumes.html",
+                "token_count": 54,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Reclaim Policy"
+              },
+              "vector_distance": 0.21949387904965156,
+              "vector_similarity": 0.7805061209503484,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "c026df2e-508d-4a42-b96a-95b26a8284fa",
+              "document_id": "8ca02da5-ba53-460e-a620-268a11259ad1",
+              "filename": "storage--persistent-volumes.html",
+              "content": "This is a stable feature in Kubernetes, and has been since the 1.33 release. You can no longer toggle this feature (the associated\nfeature gate\nhas been removed).\nFinalizers can be added on a PersistentVolume to ensure that PersistentVolumes\nhaving\nDelete\nreclaim policy are deleted only after the backing storage are deleted.\nThe finalizer\nexternal-provisioner.volume.kubernetes.io/finalizer\n(introduced\nin v1.31) is added to both dynamically provisioned and statically provisioned\nCSI volumes.\nThe finalizer\nkubernetes.io/pv-controller\n(introduced in v1.31) is added to\ndynamically provisioned in-tree plugin volumes and skipped for statically\nprovisioned in-tree plugin volumes.\nThe following is an example of dynamically provisioned in-tree plugin volume:\nkubectl describe pv pvc-74a498d6-3929-47e8-8c02-078c1ece4d78\nName:            pvc-74a498d6-3929-47e8-8c02-078c1ece4d78\nLabels:          <none>\nAnnotations:     kubernetes.io/createdby: vsphere-volume-dynamic-provisioner\npv.kubernetes.io/bound-by-controller: yes\npv.kubernetes.io/provisioned-by: kubernetes.io/vsphere-volume\nFinalizers:\n[\nkubernetes.io/pv-protection kubernetes.io/pv-controller\n]\nStorageClass:    vcp-sc",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "storage--persistent-volumes.html",
+                "token_count": 308,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "PersistentVolume deletion protection finalizer"
+              },
+              "vector_distance": 0.22428091692086993,
+              "vector_similarity": 0.7757190830791301,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q084": {
+      "vector": {
+        "client_latency_ms": 1013.078,
+        "response": {
+          "query": "How do you specify the maximal number of pod failures per index when running an indexed Job?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 993.201,
+          "results": [
+            {
+              "chunk_id": "4070ee51-a060-4a74-ae2d-62ceb995018a",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "spec\n:\ncompletions\n:\n10\nparallelism\n:\n3\ncompletionMode\n:\nIndexed\n# required for the feature\nbackoffLimitPerIndex\n:\n1\n# maximal number of failures per index\nmaxFailedIndexes\n:\n5\n# maximal number of failed indexes before terminating the Job execution\ntemplate\n:\nspec\n:\nrestartPolicy\n:\nNever\n# required for the feature\ncontainers\n:\n-\nname\n:\nexample\nimage\n:\npython\ncommand\n:\n# The jobs fails as there is at least one failed index\n# (all even indexes fail in here), yet all indexes\n# are executed as maxFailedIndexes is not exceeded.\n-\npython3\n- -\nc\n-\n|\nimport os, sys\nprint(\"Hello world\")\nif int(os.environ.get(\"JOB_COMPLETION_INDEX\")) % 2 == 0:\nsys.exit(1)\nIn the example above, the Job controller allows for one restart for each\nof the indexes. When the total number of failed indexes exceeds 5, then\nthe entire Job is terminated.\nOnce the job is finished, the Job status looks as follows:\nkubectl get -o yaml job job-backoff-limit-per-index-example\nstatus\n:\ncompletedIndexes\n:\n1\n,\n3\n,\n5\n,\n7\n,\n9\nfailedIndexes\n:\n0\n,\n2\n,\n4\n,\n6\n,\n8\nsucceeded\n:\n5\n# 1 succeeded pod for each of 5 succeeded indexes\nfailed\n:\n10\n# 2 failed pods (1 retry) for each of 5 failed indexes\nconditions\n:\n-\nmessage\n:",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 332,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.1754803762126178,
+              "vector_similarity": 0.8245196237873822,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "a0567e90-8bbb-4e62-879a-d094155936dc",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Once all indexes finish for a Job where you specified a backoff limit per index,\nif at least one of those indexes did fail, the Job controller marks the overall\nJob as failed, by setting the Failed condition in the status. The Job gets\nmarked as failed even if some, potentially nearly all, of the indexes were\nprocessed successfully.\nYou can additionally limit the maximal number of indexes marked failed by\nsetting the\n.spec.maxFailedIndexes\nfield.\nWhen the number of failed indexes exceeds the\nmaxFailedIndexes\nfield, the\nJob controller triggers termination of all remaining running Pods for that Job.\nOnce all pods are terminated, the entire Job is marked failed by the Job\ncontroller, by setting the Failed condition in the Job status.\nHere is an example manifest for a Job that defines a\nbackoffLimitPerIndex\n:\n/controllers/job-backoff-limit-per-index-example.yaml\napiVersion\n:\nbatch/v1\nkind\n:\nJob\nmetadata\n:\nname\n:\njob-backoff-limit-per-index-example\nspec\n:\ncompletions\n:\n10\nparallelism\n:\n3\ncompletionMode\n:\nIndexed\n# required for the feature\nbackoffLimitPerIndex\n:\n1\n# maximal number of failures per index\nmaxFailedIndexes\n:\n5",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 258,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.183560311794281,
+              "vector_similarity": 0.816439688205719,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "006264fc-e80d-40b6-9a6c-c38b5106bfbf",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "Feature state:\nStable\nsince Kubernetes v1.33\nMore information about this feature\nThis is a stable feature in Kubernetes, and has been since version v1.33. It was first available in the v1.28 release. You can no longer disable or opt out of this feature or behavior (it is locked); if you explicitly set a value for the associated feature gate\nJobBackoffLimitPerIndex\n, Kubernetes ignores it but does not report any error.\nWhen you run an\nindexed\nJob, you can choose to handle retries\nfor pod failures independently for each index. To do so, set the\n.spec.backoffLimitPerIndex\nto specify the maximal number of pod failures\nper index.\nWhen the per-index backoff limit is exceeded for an index, Kubernetes considers the index as failed and adds it to the\n.status.failedIndexes\nfield. The succeeded indexes, those with a successfully\nexecuted pods, are recorded in the\n.status.completedIndexes\nfield, regardless of whether you set\nthe\nbackoffLimitPerIndex\nfield.\nNote that a failing index does not interrupt execution of other indexes.\nOnce all indexes finish for a Job where you specified a backoff limit per index,\nif at least one of those indexes did fail, the Job controller marks the overall",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 264,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.1964932680130005,
+              "vector_similarity": 0.8035067319869995,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "7eeb7299-72b9-420f-86b1-7a7a3af06007",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "5\n,\n7\n,\n9\nfailedIndexes\n:\n0\n,\n2\n,\n4\n,\n6\n,\n8\nsucceeded\n:\n5\n# 1 succeeded pod for each of 5 succeeded indexes\nfailed\n:\n10\n# 2 failed pods (1 retry) for each of 5 failed indexes\nconditions\n:\n-\nmessage\n:\nJob has failed indexes\nreason\n:\nFailedIndexes\nstatus\n:\n\"True\"\ntype\n:\nFailureTarget\n-\nmessage\n:\nJob has failed indexes\nreason\n:\nFailedIndexes\nstatus\n:\n\"True\"\ntype\n:\nFailed\nThe Job controller adds the\nFailureTarget\nJob condition to trigger\nJob termination and cleanup\n. When all of the\nJob Pods are terminated, the Job controller adds the\nFailed\ncondition\nwith the same values for\nreason\nand\nmessage\nas the\nFailureTarget\nJob\ncondition. For details, see\nTermination of Job Pods\n.\nAdditionally, you may want to use the per-index backoff along with a\npod failure policy\n. When using\nper-index backoff, there is a new\nFailIndex\naction available which allows you to\navoid unnecessary retries within an index.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 248,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Backoff limit per index"
+              },
+              "vector_distance": 0.20378780364990234,
+              "vector_similarity": 0.7962121963500977,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "8a6bc541-8d90-440a-b1b5-c9c3bc27a5d5",
+              "document_id": "3c97a51f-5092-4eb3-b020-7b9a9b883548",
+              "filename": "workloads--controllers--job.html",
+              "content": "spec.podFailurePolicy.rules[*].action\n. Possible values are:\nFailJob\n: use to indicate that the Pod's job should be marked as Failed and\nall running Pods should be terminated.\nIgnore\n: use to indicate that the counter towards the\n.spec.backoffLimit\nshould not be incremented and a replacement Pod should be created.\nCount\n: use to indicate that the Pod should be handled in the default way.\nThe counter towards the\n.spec.backoffLimit\nshould be incremented.\nFailIndex\n: use this action along with\nbackoff limit per index\nto avoid unnecessary retries within the index of a failed pod.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--controllers--job.html",
+                "token_count": 129,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.21984374523162842,
+              "vector_similarity": 0.7801562547683716,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q097": {
+      "vector": {
+        "client_latency_ms": 923.726,
+        "response": {
+          "query": "What is the correct process to make changes to a running containerized application?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 905.177,
+          "results": [
+            {
+              "chunk_id": "abbb0a0b-f49f-4d75-a0d8-f8fc01253380",
+              "document_id": "29edfe32-e301-4c73-9ef0-923d4de8d115",
+              "filename": "containers.html",
+              "content": "A\ncontainer image\nis a ready-to-run\nsoftware package containing everything needed to run an application:\nthe code and any runtime it requires, application and system libraries,\nand default values for any essential settings.\nContainers are intended to be stateless and\nimmutable\n:\nyou should not change\nthe code of a container that is already running. If you have a containerized\napplication and want to make changes, the correct process is to build a new\nimage that includes the change, then recreate the container to start from the\nupdated image.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers.html",
+                "token_count": 110,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container images"
+              },
+              "vector_distance": 0.24775085591527357,
+              "vector_similarity": 0.7522491440847264,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "383b20ef-32bf-4284-b261-4d4315270ba5",
+              "document_id": "16cd6420-7062-4833-9463-898f123c6308",
+              "filename": "workloads--pods.html",
+              "content": "As mentioned in the previous section, when the Pod template for a workload\nresource is changed, the controller creates new Pods based on the updated\ntemplate instead of updating or patching the existing Pods.\nKubernetes doesn't prevent you from managing Pods directly. It is possible to\nupdate some fields of a running Pod, in place. However, Pod update operations\nlike\npatch\n, and\nreplace\nhave some limitations:\nMost of the metadata about a Pod is immutable. For example, you cannot\nchange the\nnamespace\n,\nname\n,\nuid\n, or\ncreationTimestamp\nfields.\nIf the\nmetadata.deletionTimestamp\nis set, no new entry can be added to the\nmetadata.finalizers\nlist.\nPod updates may not change fields other than\nspec.containers[*].image\n,\nspec.initContainers[*].image\n,\nspec.activeDeadlineSeconds\n,\nspec.terminationGracePeriodSeconds\n,\nspec.tolerations\nor\nspec.schedulingGates\n. For\nspec.tolerations\n, you can only add new entries.\nWhen updating the\nspec.activeDeadlineSeconds\nfield, two types of updates\nare allowed:\nsetting the unassigned field to a positive number;\nupdating the field from a positive number to a smaller, non-negative\nnumber.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods.html",
+                "token_count": 260,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Pod update and replacement"
+              },
+              "vector_distance": 0.3122887406435231,
+              "vector_similarity": 0.6877112593564769,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "d5f17c62-f6ef-4a90-a268-462dca1ab03e",
+              "document_id": "42fe712e-8aca-426e-ba05-fc18c2e7b66b",
+              "filename": "workloads--pods--pod-lifecycle.html",
+              "content": "You can configure whether a container restart is required for the resize using\nresizePolicy\nin the container specification.\nFor detailed instructions on performing in-place resize, see\nResize CPU and Memory Resources assigned to Containers\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods--pod-lifecycle.html",
+                "token_count": 43,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "In-place Pod resize"
+              },
+              "vector_distance": 0.3155545796288648,
+              "vector_similarity": 0.6844454203711352,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "82f14694-150b-4e33-a385-75dcd88432e3",
+              "document_id": "31c31473-7f70-49ab-8519-b52752c71c8b",
+              "filename": "workloads--pods--sidecar-containers.html",
+              "content": "Sidecar containers work alongside the main container, extending its functionality and\nproviding additional services.\nSidecar containers run concurrently with the main application container. They are active\nthroughout the lifecycle of the pod and can be started and stopped independently of the\nmain container. Unlike\ninit containers\n,\nsidecar containers support\nprobes\nto control their lifecycle.\nSidecar containers can interact directly with the main application containers, because\nlike init containers they always share the same network, and can optionally also share\nvolumes (filesystems).\nInit containers stop before the main containers start up, so init containers cannot\nexchange messages with the app container in a Pod. Any data passing is one-way\n(for example, an init container can put information inside an\nemptyDir\nvolume).\nChanging the image of a sidecar container will not cause the Pod to restart, but will\ntrigger a container restart.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods--sidecar-containers.html",
+                "token_count": 183,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Differences from init containers"
+              },
+              "vector_distance": 0.31894860493524013,
+              "vector_similarity": 0.6810513950647599,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "9d36fcf1-4bde-48b6-9621-c85c55d4730f",
+              "document_id": "1856b7a6-8645-4789-aafa-426d676fd5df",
+              "filename": "containers--images.html",
+              "content": "You should avoid using the\n:latest\ntag when deploying containers in production as\nit is harder to track which version of the image is running and more difficult to\nroll back properly.\nInstead, specify a meaningful tag such as\nv1.42.0\nand/or a digest.\nTo make sure the Pod always uses the same version of a container image, you can specify\nthe image's digest;\nreplace\n<image-name>:<tag>\nwith\n<image-name>@<digest>\n(for example,\nimage@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2\n).\nWhen using image tags, if the image registry were to change the code that the tag on that image\nrepresents, you might end up with a mix of Pods running the old and new code. An image digest\nuniquely identifies a specific version of the image, so Kubernetes runs the same code every time\nit starts a container with that image name and digest specified. Specifying an image by digest\npins the code that you run so that a change at the registry cannot lead to that mix of versions.\nThere are third-party\nadmission controllers\nthat mutate Pods (and PodTemplates) when they are created, so that the\nrunning workload is defined based on an image digest rather than a tag.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--images.html",
+                "token_count": 291,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.3221451630126082,
+              "vector_similarity": 0.6778548369873918,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q103": {
+      "vector": {
+        "client_latency_ms": 515.218,
+        "response": {
+          "query": "Can a single Kubernetes Service have multiple port definitions with different protocols?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 497.796,
+          "results": [
+            {
+              "chunk_id": "73bc14c1-5ff3-44f3-a7fd-8943e7324a37",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "TCP\n; you can also\nuse any other\nsupported protocol\n.\nBecause many Services need to expose more than one port, Kubernetes supports\nmultiple port definitions\nfor a single Service.\nEach port definition can have the same\nprotocol\n, or a different one.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 54,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Port definitions"
+              },
+              "vector_distance": 0.1693464022485257,
+              "vector_similarity": 0.8306535977514743,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "5dd086ec-24c9-49f5-9434-dc3e39de4fe3",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "For some Services, you need to expose more than one port.\nKubernetes lets you configure multiple port definitions on a Service object.\nWhen using multiple ports for a Service, you must give all of your ports names\nso that these are unambiguous.\nFor example:\napiVersion\n:\nv1\nkind\n:\nService\nmetadata\n:\nname\n:\nmy-service\nspec\n:\nselector\n:\napp.kubernetes.io/name\n:\nMyApp\nports\n:\n-\nname\n:\nhttp\nprotocol\n:\nTCP\nport\n:\n80\ntargetPort\n:\n9376\n-\nname\n:\nhttps\nprotocol\n:\nTCP\nport\n:\n443\ntargetPort\n:\n9377",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 138,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Multi-port Services"
+              },
+              "vector_distance": 0.18992999762088014,
+              "vector_similarity": 0.8100700023791199,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "860bdead-983e-4893-8f6a-5a47ef4eb739",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "This is a stable feature in Kubernetes, and has been since the 1.26 release. You can no longer toggle this feature (the associated\nfeature gate\nhas been removed).\nBy default, for LoadBalancer type of Services, when there is more than one port defined, all\nports must have the same protocol, and the protocol must be one which is supported\nby the cloud provider.\nThe feature gate\nMixedProtocolLBService\n(enabled by default for the kube-apiserver as of v1.24) allows the use of\ndifferent protocols for LoadBalancer type of Services, when there is more than one port defined.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 128,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Load balancers with mixed protocol types"
+              },
+              "vector_distance": 0.2119166381309413,
+              "vector_similarity": 0.7880833618690587,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "fa6dba77-c0f5-4b11-a789-08044b5cbf7a",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Port definitions in Pods have names, and you can reference these names in the\ntargetPort\nattribute of a Service. For example, we can bind the\ntargetPort\nof the Service to the Pod port in the following way:\napiVersion\n:\nv1\nkind\n:\nService\nmetadata\n:\nname\n:\nnginx-service\nspec\n:\nselector\n:\napp.kubernetes.io/name\n:\nproxy\nports\n:\n-\nname\n:\nname-of-service-port\nprotocol\n:\nTCP\nport\n:\n80\ntargetPort\n:\nhttp-web-svc\n---\napiVersion\n:\nv1\nkind\n:\nPod\nmetadata\n:\nname\n:\nnginx\nlabels\n:\napp.kubernetes.io/name\n:\nproxy\nspec\n:\ncontainers\n:\n-\nname\n:\nnginx\nimage\n:\nnginx:stable\nports\n:\n-\ncontainerPort\n:\n80\nname\n:\nhttp-web-svc\nThis works even if there is a mixture of Pods in the Service using a single\nconfigured name, with the same network protocol available via different\nport numbers. This offers a lot of flexibility for deploying and evolving\nyour Services. For example, you can change the port numbers that Pods expose\nin the next version of your backend software, without breaking clients.\nThe default protocol for Services is\nTCP\n; you can also\nuse any other\nsupported protocol\n.\nBecause many Services need to expose more than one port, Kubernetes supports\nmultiple port definitions\nfor a single Service.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 301,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Port definitions"
+              },
+              "vector_distance": 0.21450302644082953,
+              "vector_similarity": 0.7854969735591705,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "2160946d-0e99-4e11-9a59-7b592bdec85e",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "The set of protocols that can be used for load balanced Services is defined by your\ncloud provider; they may impose restrictions beyond what the Kubernetes API enforces.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 32,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.21534071014346778,
+              "vector_similarity": 0.7846592898565322,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q115": {
+      "vector": {
+        "client_latency_ms": 581.417,
+        "response": {
+          "query": "What is the purpose of the kubelet's --node-status-update-frequency parameter?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 563.366,
+          "results": [
+            {
+              "chunk_id": "533e5862-b00a-4b3b-bbc4-30b1861be0f8",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "if the node has no IPv4 addresses then the kubelet uses the node's default IPv6 address.\n--node-labels\n-\nLabels\nto add when registering the node\nin the cluster (see label restrictions enforced by the\nNodeRestriction admission plugin\n).\n--node-status-update-frequency\n- Specifies how often kubelet posts its node status to the API server.\nWhen the\nNode authorization mode\nand\nNodeRestriction admission plugin\nare enabled, kubelets are only authorized to create/modify their own Node resource.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 107,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Self-registration of Nodes"
+              },
+              "vector_distance": 0.25752738028438327,
+              "vector_similarity": 0.7424726197156167,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "096196cc-068b-49a6-93c1-8dbc4bd501e4",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "Heartbeats, sent by Kubernetes nodes, help your cluster determine the\navailability of each node, and to take action when failures are detected.\nFor nodes there are two forms of heartbeats:\nUpdates to the\n.status\nof a Node.\nLease\nobjects\nwithin the\nkube-node-lease\nnamespace\n.\nEach Node has an associated Lease object.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 74,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node heartbeats"
+              },
+              "vector_distance": 0.27987667562047536,
+              "vector_similarity": 0.7201233243795246,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "7b2325dc-5df5-4d26-8c23-9487fe7d7adc",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "The node\ncontroller\nis a\nKubernetes control plane component that manages various aspects of nodes.\nThe node controller has multiple roles in a node's life. The first is assigning a\nCIDR block to the node when it is registered (if CIDR assignment is turned on).\nThe second is keeping the node controller's internal list of nodes up to date with\nthe cloud provider's list of available machines. When running in a cloud\nenvironment and whenever a node is unhealthy, the node controller asks the cloud\nprovider if the VM for that node is still available. If not, the node\ncontroller deletes the node from its list of nodes.\nThe third is monitoring the nodes' health. The node controller is\nresponsible for:\nIn the case that a node becomes unreachable, updating the\nReady\ncondition\nin the Node's\n.status\nfield. In this case the node controller sets the\nReady\ncondition to\nUnknown\n.\nIf a node remains unreachable: triggering\nAPI-initiated eviction\nfor all of the Pods on the unreachable node. By default, the node controller\nwaits 5 minutes between marking the node as\nUnknown\nand submitting\nthe first eviction request.\nBy default, the node controller checks the state of each node every 5 seconds.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 259,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node controller"
+              },
+              "vector_distance": 0.2888218588339162,
+              "vector_similarity": 0.7111781411660838,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "8c9dc7a3-43c3-45c8-b7ab-04f2f663e8df",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "waits 5 minutes between marking the node as\nUnknown\nand submitting\nthe first eviction request.\nBy default, the node controller checks the state of each node every 5 seconds.\nThis period can be configured using the\n--node-monitor-period\nflag on the\nkube-controller-manager\ncomponent.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 61,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node controller"
+              },
+              "vector_distance": 0.2905698630043877,
+              "vector_similarity": 0.7094301369956123,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "7bf347cc-d46c-4f0c-90bc-8c192150ea1d",
+              "document_id": "42fe712e-8aca-426e-ba05-fc18c2e7b66b",
+              "filename": "workloads--pods--pod-lifecycle.html",
+              "content": "Feature state:\nDeprecated\nsince Kubernetes v1.35; disabled by default\nMore information about this feature\nTo use this feature, you (or a cluster administrator) will need to enable the\nChangeContainerStatusOnKubeletRestart\nfeature gate for all relevant components in your cluster.\nSee\nEnable Or Disable Feature Gates\nfor more information.\nWhen the kubelet starts, it checks to see if there is already a Node with bound Pods.\nIf the Node's\nReady\ncondition\nremains unchanged,\nin other words the condition has not transitioned from true to false, Kubernetes detects this a\nkubelet restart\n.\n(It's possible to restart the kubelet in other ways, for example to fix a node bug,\nbut in these cases, Kubernetes picks the safe option and treats this as if you\nstopped the kubelet and then later started it).\nWhen the kubelet restarts, the container statuses are managed differently based on the feature gate setting:\nBy default, the kubelet does not change container statuses after a restart.\nContainers that were in set to\nready: true\nstate remain ready.\nIf you stop the kubelet long enough for it to fail a series of\nnode heartbeat\nchecks,",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "workloads--pods--pod-lifecycle.html",
+                "token_count": 246,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Detection of kubelet restarts"
+              },
+              "vector_distance": 0.30835745880857235,
+              "vector_similarity": 0.6916425411914277,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q127": {
+      "vector": {
+        "client_latency_ms": 1010.458,
+        "response": {
+          "query": "What kubectl command can be used to select all Statefulsets and Services that are not in the default namespace?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 990.174,
+          "results": [
+            {
+              "chunk_id": "8bac9a3d-29f2-413e-a1d2-d5cfdab135b1",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "You can use field selectors across multiple resource types. This\nkubectl\ncommand selects all Statefulsets and Services that are not in the\ndefault\nnamespace:\nkubectl get statefulsets,services --all-namespaces --field-selector metadata.namespace!\n=\ndefault",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 51,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Multiple resource types"
+              },
+              "vector_distance": 0.18624071951872545,
+              "vector_similarity": 0.8137592804812745,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "631f8db2-3c33-4bd8-9e48-e593eadfd5c3",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "You can use the\n=\n,\n==\n, and\n!=\noperators with field selectors (\n=\nand\n==\nmean the same thing). This\nkubectl\ncommand, for example, selects all Kubernetes Services that aren't in the\ndefault\nnamespace:\nkubectl get services  --all-namespaces --field-selector metadata.namespace!\n=\ndefault",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 66,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Supported operators"
+              },
+              "vector_distance": 0.23498435228969772,
+              "vector_similarity": 0.7650156477103023,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "6306c29e-7adc-4456-8bc3-0b2991dfa0d6",
+              "document_id": "cd38f118-7627-4279-ba86-8d6a0c2a259b",
+              "filename": "overview--working-with-objects--field-selectors.html",
+              "content": "Field selectors\nlet you select Kubernetes\nobjects\nbased on the\nvalue of one or more resource fields. Here are some examples of field selector queries:\nmetadata.name=my-service\nmetadata.namespace!=default\nstatus.phase=Pending\nThis\nkubectl\ncommand selects all Pods for which the value of the\nstatus.phase\nfield is\nRunning\n:\nkubectl get pods --field-selector status.phase\n=\nRunning",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--field-selectors.html",
+                "token_count": 81,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Field Selectors"
+              },
+              "vector_distance": 0.2625498991444708,
+              "vector_similarity": 0.7374501008555292,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "ae7b6e0a-210d-41c3-bd7c-1fbe1ffef23c",
+              "document_id": "a4b196fb-2cc0-474c-a800-0b39a6dd3b4e",
+              "filename": "overview--working-with-objects--namespaces.html",
+              "content": "You can list the current namespaces in a cluster using:\nkubectl get namespace\nNAME              STATUS   AGE\ndefault           Active   1d\nkube-node-lease   Active   1d\nkube-public       Active   1d\nkube-system       Active   1d",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--namespaces.html",
+                "token_count": 57,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Viewing namespaces"
+              },
+              "vector_distance": 0.2778425431894469,
+              "vector_similarity": 0.7221574568105531,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "e47676c4-9a1c-47d2-99d1-fa3550cf1ad1",
+              "document_id": "a4b196fb-2cc0-474c-a800-0b39a6dd3b4e",
+              "filename": "overview--working-with-objects--namespaces.html",
+              "content": "To set the namespace for a current request, use the\n--namespace\nflag.\nFor example:\nkubectl run nginx --image\n=\nnginx --namespace\n=\n<insert-namespace-name-here>\nkubectl get pods --namespace\n=\n<insert-namespace-name-here>",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "overview--working-with-objects--namespaces.html",
+                "token_count": 55,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Setting the namespace for a request"
+              },
+              "vector_distance": 0.28723414876358977,
+              "vector_similarity": 0.7127658512364102,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q131": {
+      "vector": {
+        "client_latency_ms": 907.196,
+        "response": {
+          "query": "Which API should clients use instead of the deprecated Endpoints API?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 889.312,
+          "results": [
+            {
+              "chunk_id": "c6fa2088-4ddf-4049-bbda-4fd912554b5d",
+              "document_id": "85c63df9-de82-4341-bf48-50f0c0bd67c7",
+              "filename": "services-networking--service.html",
+              "content": "Feature state:\nDeprecated\nsince Kubernetes v1.33\nThe EndpointSlice API is the evolution of the older\nEndpoints\nAPI. The deprecated Endpoints API has several problems relative to\nEndpointSlice:\nIt does not support dual-stack clusters.\nIt does not contain information needed to support newer features, such as\ntrafficDistribution\n.\nIt will truncate the list of endpoints if it is too long to fit in a single object.\nBecause of this, it is recommended that all clients use the\nEndpointSlice API rather than Endpoints.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--service.html",
+                "token_count": 107,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Endpoints (deprecated)"
+              },
+              "vector_distance": 0.28390433096315326,
+              "vector_similarity": 0.7160956690368467,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "cdba6ddc-072e-40ec-9773-7d066cf6f0e2",
+              "document_id": "235458c7-22f1-4596-b5d8-d345a999802f",
+              "filename": "services-networking--endpoint-slices.html",
+              "content": "Feature state:\nDeprecated\nsince Kubernetes v1.33\nThe EndpointSlice API is a replacement for the older Endpoints API. To\npreserve compatibility with older controllers and user workloads that\nexpect\nkube-proxy\nto route traffic based on Endpoints resources, the cluster's control\nplane mirrors most user-created Endpoints resources to corresponding\nEndpointSlices.\n(However, this feature, like the rest of the Endpoints API, is\ndeprecated. Users who manually specify endpoints for selectorless\nServices should do so by creating EndpointSlice resources directly,\nrather than by creating Endpoints resources and allowing them to be\nmirrored.)\nThe control plane mirrors Endpoints resources unless:\nthe Endpoints resource has a\nendpointslice.kubernetes.io/skip-mirror\nlabel\nset to\ntrue\n.\nthe Endpoints resource has a\ncontrol-plane.alpha.kubernetes.io/leader\nannotation.\nthe corresponding Service resource does not exist.\nthe corresponding Service resource has a non-nil selector.\nIndividual Endpoints resources may translate into multiple EndpointSlices. This\nwill occur if an Endpoints resource has multiple subsets or includes endpoints",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--endpoint-slices.html",
+                "token_count": 226,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "EndpointSlice mirroring"
+              },
+              "vector_distance": 0.3240142657765297,
+              "vector_similarity": 0.6759857342234703,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "f2154851-1c82-4f12-a1ef-831f3a50a25c",
+              "document_id": "235458c7-22f1-4596-b5d8-d345a999802f",
+              "filename": "services-networking--endpoint-slices.html",
+              "content": "Follow the\nConnecting Applications with Services\ntutorial\nRead the\nAPI reference\nfor the EndpointSlice API\nRead the\nAPI reference\nfor the Endpoints API",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--endpoint-slices.html",
+                "token_count": 33,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "What's next"
+              },
+              "vector_distance": 0.3254385784529781,
+              "vector_similarity": 0.6745614215470219,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "576c6f18-89c2-439c-b219-7fefaa582ab4",
+              "document_id": "235458c7-22f1-4596-b5d8-d345a999802f",
+              "filename": "services-networking--endpoint-slices.html",
+              "content": "Clients of the EndpointSlice API must iterate through all the existing EndpointSlices\nassociated to a Service and build a complete list of unique network endpoints. It is\nimportant to mention that endpoints may be duplicated in different EndpointSlices.\nYou can find a reference implementation for how to perform this endpoint aggregation\nand deduplication as part of the\nEndpointSliceCache\ncode within\nkube-proxy\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--endpoint-slices.html",
+                "token_count": 81,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.3590700053337218,
+              "vector_similarity": 0.6409299946662782,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "59c9393a-8f6a-417f-8a5f-3580f43a2b66",
+              "document_id": "235458c7-22f1-4596-b5d8-d345a999802f",
+              "filename": "services-networking--endpoint-slices.html",
+              "content": "The EndpointSlice API is the mechanism that Kubernetes uses to let your Service scale to handle large numbers of backends, and allows the cluster to update its list of healthy backends efficiently.\nFeature state:\nStable\nsince Kubernetes v1.21\nEndpointSlices track the IP addresses of backend endpoints.\nEndpointSlices are normally associated with a\nService\nand the backend endpoints typically represent\nPods\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "services-networking--endpoint-slices.html",
+                "token_count": 83,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "EndpointSlices"
+              },
+              "vector_distance": 0.361441931810493,
+              "vector_similarity": 0.638558068189507,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q142": {
+      "vector": {
+        "client_latency_ms": 527.206,
+        "response": {
+          "query": "How often does the node controller check the state of each node by default?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 510.327,
+          "results": [
+            {
+              "chunk_id": "8c9dc7a3-43c3-45c8-b7ab-04f2f663e8df",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "waits 5 minutes between marking the node as\nUnknown\nand submitting\nthe first eviction request.\nBy default, the node controller checks the state of each node every 5 seconds.\nThis period can be configured using the\n--node-monitor-period\nflag on the\nkube-controller-manager\ncomponent.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 61,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node controller"
+              },
+              "vector_distance": 0.207924998042732,
+              "vector_similarity": 0.792075001957268,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "7b2325dc-5df5-4d26-8c23-9487fe7d7adc",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "The node\ncontroller\nis a\nKubernetes control plane component that manages various aspects of nodes.\nThe node controller has multiple roles in a node's life. The first is assigning a\nCIDR block to the node when it is registered (if CIDR assignment is turned on).\nThe second is keeping the node controller's internal list of nodes up to date with\nthe cloud provider's list of available machines. When running in a cloud\nenvironment and whenever a node is unhealthy, the node controller asks the cloud\nprovider if the VM for that node is still available. If not, the node\ncontroller deletes the node from its list of nodes.\nThe third is monitoring the nodes' health. The node controller is\nresponsible for:\nIn the case that a node becomes unreachable, updating the\nReady\ncondition\nin the Node's\n.status\nfield. In this case the node controller sets the\nReady\ncondition to\nUnknown\n.\nIf a node remains unreachable: triggering\nAPI-initiated eviction\nfor all of the Pods on the unreachable node. By default, the node controller\nwaits 5 minutes between marking the node as\nUnknown\nand submitting\nthe first eviction request.\nBy default, the node controller checks the state of each node every 5 seconds.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 259,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node controller"
+              },
+              "vector_distance": 0.24555647373199463,
+              "vector_similarity": 0.7544435262680054,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "096196cc-068b-49a6-93c1-8dbc4bd501e4",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "Heartbeats, sent by Kubernetes nodes, help your cluster determine the\navailability of each node, and to take action when failures are detected.\nFor nodes there are two forms of heartbeats:\nUpdates to the\n.status\nof a Node.\nLease\nobjects\nwithin the\nkube-node-lease\nnamespace\n.\nEach Node has an associated Lease object.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 74,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Node heartbeats"
+              },
+              "vector_distance": 0.29714642184099893,
+              "vector_similarity": 0.7028535781590011,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "3d6fed2b-b5d7-4ab8-824a-c9417bdf1b18",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "then the eviction mechanism does not take per-zone unavailability into account.\nA key reason for spreading your nodes across availability zones is so that the\nworkload can be shifted to healthy zones when one entire zone goes down.\nTherefore, if all nodes in a zone are unhealthy, then the node controller evicts at\nthe normal rate of\n--node-eviction-rate\n. The corner case is when all zones are\ncompletely unhealthy (none of the nodes in the cluster are healthy). In such a\ncase, the node controller assumes that there is some problem with connectivity\nbetween the control plane and the nodes, and doesn't perform any evictions.\n(If there has been an outage and some nodes reappear, the node controller does\nevict pods from the remaining nodes that are unhealthy or unreachable).\nThe node controller is also responsible for evicting pods running on nodes with\nNoExecute\ntaints, unless those pods tolerate that taint.\nThe node controller also adds\ntaints\ncorresponding to node problems like node unreachable or not ready. This means\nthat the scheduler won't place Pods onto unhealthy nodes.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 231,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Rate limits on eviction"
+              },
+              "vector_distance": 0.3072715997695923,
+              "vector_similarity": 0.6927284002304077,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4c47dcc8-e83c-4a32-93fc-4bdda361cacd",
+              "document_id": "405e46bb-6391-4bf9-b8c6-2d6ef2888155",
+              "filename": "architecture--nodes.html",
+              "content": "Kubernetes keeps the object for the invalid Node and continues checking to see whether\nit becomes healthy.\nYou, or a\ncontroller\n, must explicitly\ndelete the Node object to stop that health checking.\nThe name of a Node object must be a valid\nDNS subdomain name\n.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "architecture--nodes.html",
+                "token_count": 58,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.31420260667800903,
+              "vector_similarity": 0.685797393321991,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    },
+    "q146": {
+      "vector": {
+        "client_latency_ms": 879.249,
+        "response": {
+          "query": "Which hook action is executed directly inside the container rather than by the kubelet process?",
+          "mode": "vector",
+          "candidate_count": 20,
+          "latency_ms": 859.8,
+          "results": [
+            {
+              "chunk_id": "0b2679b9-89d1-47f0-ab7b-93ceb6ba8ce3",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "When a Container lifecycle management hook is called,\nthe Kubernetes management system executes the handler according to the hook action,\nhttpGet\n,\ntcpSocket\n(\ndeprecated\n)\nand\nsleep\nare executed by the kubelet process, and\nexec\nis executed in the container.\nThe\nPostStart\nhook handler call is initiated when a container is created,\nmeaning the container ENTRYPOINT and the\nPostStart\nhook are triggered simultaneously.\n(This means it generally doesn't make sense to use an HTTP hook for\nPostStart\n, since\nthere is no guarantee that the container's process will have fully started up when the\nhook runs.)\nIf the\nPostStart\nhook takes too long to execute or if it hangs,\nit can prevent the container from transitioning to a\nrunning\nstate.\nPreStop\nhooks are not executed asynchronously from the signal to stop the Container; the hook must\ncomplete its execution before the TERM signal can be sent. If a\nPreStop\nhook hangs during\nexecution, the Pod's phase will be\nTerminating\nand remain there until the Pod is killed after its\nterminationGracePeriodSeconds\nexpires. This grace period applies to the total time it takes for\nboth the\nPreStop",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 247,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Hook handler execution"
+              },
+              "vector_distance": 0.2248099774348763,
+              "vector_similarity": 0.7751900225651237,
+              "vector_rank": 1,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.01639344262295082,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "4c5aac24-6fb3-4cce-9211-cd2cfb17b08e",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "Analogous to many programming language frameworks that have component lifecycle hooks, such as Angular,\nKubernetes provides Containers with lifecycle hooks.\nThe hooks enable Containers to be aware of events in their management lifecycle\nand run code implemented in a handler when the corresponding lifecycle hook is executed.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 55,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Overview"
+              },
+              "vector_distance": 0.23801308870315008,
+              "vector_similarity": 0.7619869112968499,
+              "vector_rank": 2,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.016129032258064516,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "a38a3f4f-3ed5-477b-88c8-9cc3f6742ec8",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "This page describes how kubelet managed Containers can use the Container lifecycle hook framework\nto run code triggered by events during their management lifecycle.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 27,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Container Lifecycle Hooks"
+              },
+              "vector_distance": 0.23863695629614712,
+              "vector_similarity": 0.7613630437038529,
+              "vector_rank": 3,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015873015873015872,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "e57cdcac-c410-4c42-a050-45e06a0eba0f",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "While the hook runs concurrently with the container process,\nit can delay container status updates;\nthe container may not transition to\nRunning\nuntil the hook completes.\nPreStop\nThis hook is called immediately before a container is terminated due to an API request or management\nevent such as a liveness/startup probe failure, preemption, resource contention and others. A call\nto the\nPreStop\nhook fails if the container is already in a terminated or completed state and the\nhook must complete before the TERM signal to stop the container can be sent. The Pod's termination\ngrace period countdown begins before the\nPreStop\nhook is executed, so regardless of the outcome of\nthe handler, the container will eventually terminate within the Pod's termination grace period. No\nparameters are passed to the handler.\nA more detailed description of the termination behavior can be found in\nTermination of Pods\n.\nStopSignal\nThe StopSignal lifecycle can be used to define a stop signal which would be sent to the container when it is\nstopped. If you set this, it overrides any\nSTOPSIGNAL\ninstruction defined within the container image.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 230,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Note:"
+              },
+              "vector_distance": 0.240746424153659,
+              "vector_similarity": 0.759253575846341,
+              "vector_rank": 4,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015625,
+              "rerank_score": null,
+              "rerank_rank": null
+            },
+            {
+              "chunk_id": "822e8956-d44f-4ae8-84d1-82826693c71a",
+              "document_id": "b2624bdc-1c75-45e9-a1d2-ae849a73d166",
+              "filename": "containers--container-lifecycle-hooks.html",
+              "content": "Containers can access a hook by implementing and registering a handler for that hook.\nThere are three types of hook handlers that can be implemented for Containers:\nExec - Executes a specific command, such as\npre-stop.sh\n, inside the cgroups and namespaces of the Container.\nResources consumed by the command are counted against the Container.\nHTTP - Executes an HTTP request against a specific endpoint on the Container.\nSleep - Pauses the container for a specified duration.",
+              "metadata": {
+                "chunker": "recursive",
+                "chunk_size": 1200,
+                "page_number": null,
+                "source_file": "containers--container-lifecycle-hooks.html",
+                "token_count": 90,
+                "chunk_overlap": 200,
+                "token_encoding": "cl100k_base",
+                "section_heading": "Hook handler implementations"
+              },
+              "vector_distance": 0.24429003928362958,
+              "vector_similarity": 0.7557099607163704,
+              "vector_rank": 5,
+              "keyword_score": null,
+              "keyword_rank": null,
+              "rrf_score": 0.015384615384615385,
+              "rerank_score": null,
+              "rerank_rank": null
+            }
+          ],
+          "candidates": null,
+          "rerank_applied": false,
+          "rerank_ms": 0.0,
+          "reranker_model": null,
+          "cache_hit": false
+        }
+      }
+    }
+  },
+  "errors": []
+}
