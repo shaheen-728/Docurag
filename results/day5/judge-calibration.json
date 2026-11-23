@@ -1,0 +1,129 @@
+{
+  "identity": {
+    "cases_sha256": "38f00293f141fac28b295c30ec7288e6a9abc8ce74844846e8289fcd1ff676ec",
+    "dataset_sha256": "4f9de3805cff6fab5b004baf1f4aa7e15b71e2e826cd124b6bf504b7c4f4883d",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "rubric_sha256": "8723a18f9b7b0c249ad92a9cf040ad3a74f096ddfd5a05635bad95438a41d8f6",
+    "implementation_sha256": "0b07f4b44773b1206a4a9e2c7b38742c2adbc3371a0186e773bbbe8c6e0f1661",
+    "timeout_seconds": 60
+  },
+  "results": {
+    "q002-original": {
+      "claims": [
+        {
+          "text": "Employees may request one company laptop and one external monitor.",
+          "supported": true,
+          "source_numbers": [
+            1
+          ],
+          "reason": "The text explicitly states that employees may request one company laptop and one external monitor."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 1.0,
+      "abstained": false,
+      "reason": "The answer directly and correctly identifies the equipment employees may request based on the policy.",
+      "faithfulness": 1.0,
+      "passed": true
+    },
+    "q002-deliberately_wrong": {
+      "claims": [
+        {
+          "text": "Employees may request three company laptops and two external monitors.",
+          "supported": false,
+          "source_numbers": [
+            1
+          ],
+          "reason": "Source 1 states that employees may request one company laptop and one external monitor, not three and two."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 0.0,
+      "abstained": false,
+      "reason": "The answer directly addresses the question, but provides incorrect information that contradicts the retrieved context and reference answer.",
+      "faithfulness": 0.0,
+      "passed": true
+    },
+    "q005-original": {
+      "claims": [
+        {
+          "text": "Under the sample Employee Travel Policy, the standard maximum reimbursable hotel expense is 4,000 INR per night.",
+          "supported": true,
+          "source_numbers": [
+            1
+          ],
+          "reason": "The source text states that the maximum reimbursable hotel expense is 4,000 INR per night under the Accommodation section of the Employee Travel Policy."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 1.0,
+      "abstained": false,
+      "reason": "The answer correctly identifies the standard maximum reimbursable hotel expense as 4,000 INR per night using the provided context.",
+      "faithfulness": 1.0,
+      "passed": true
+    },
+    "q005-deliberately_wrong": {
+      "claims": [
+        {
+          "text": "The standard hotel reimbursement limit is 9,000 INR per night.",
+          "supported": false,
+          "source_numbers": [
+            1
+          ],
+          "reason": "Source 1 states the maximum reimbursable hotel expense is 4,000 INR per night, not 9,000 INR."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 0.0,
+      "abstained": false,
+      "reason": "The answer directly addresses the question but provides an incorrect value (9,000 INR instead of 4,000 INR).",
+      "faithfulness": 0.0,
+      "passed": true
+    },
+    "q001-original": {
+      "claims": [
+        {
+          "text": "When a DaemonSet is deleted, it cleans up the Pods it created.",
+          "supported": true,
+          "source_numbers": [
+            2
+          ],
+          "reason": "Source 2 explicitly states that deleting a DaemonSet will clean up the Pods it created."
+        },
+        {
+          "text": "If you specify `--cascade=orphan` with `kubectl`, the Pods will be left on the nodes.",
+          "supported": true,
+          "source_numbers": [
+            1
+          ],
+          "reason": "Source 1 states that if you specify --cascade=orphan with kubectl, then the Pods will be left on the nodes."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 1.0,
+      "abstained": false,
+      "reason": "The answer correctly states that deleting a DaemonSet cleans up its Pods, and adds relevant context regarding the --cascade=orphan option supported by the retrieved documents.",
+      "faithfulness": 1.0,
+      "passed": true
+    },
+    "q001-deliberately_wrong": {
+      "claims": [
+        {
+          "text": "Deleting a DaemonSet always preserves its Pods without any special options.",
+          "supported": false,
+          "source_numbers": [
+            1
+          ],
+          "reason": "Source 1 states that pods are only left on nodes if '--cascade=orphan' is specified; otherwise, deleting a DaemonSet cleans them up as confirmed in Source 2."
+        }
+      ],
+      "answer_relevancy": 1.0,
+      "answer_correctness": 0.0,
+      "abstained": false,
+      "reason": "The answer incorrectly claims that deleting a DaemonSet always preserves its pods, whereas pods are cleaned up by default unless `--cascade=orphan` is specified.",
+      "faithfulness": 0.0,
+      "passed": true
+    }
+  }
+}

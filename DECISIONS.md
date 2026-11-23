@@ -145,3 +145,39 @@ Record these after implementation and evaluation:
   resistance.
 - Streamed answers remain provisional until the done event.
 - Recorded latency examples are individual requests, not p95 measurements.
+
+## Development retrieval comparison — 80 questions
+
+Vector retrieval is the provisional default: Hit@5 1.000,
+MRR@5 0.973, pooled Recall@5 0.984, mean client latency 870.4 ms.
+
+Hybrid did not improve retrieval quality in this run.
+Hybrid with reranking achieved the highest MRR@5 (0.988),
+but mean latency increased to 5701.7 ms and pooled Recall@5
+fell to 0.946. Reranking remains optional.
+
+Labels are assistant-reviewed, not human-verified.
+Recall uses pooled judgments. Latency includes cold starts.
+These are development results; the 20-question test remains held out.
+
+Judge format retries provide validation feedback and a structural example.
+Saved valid judgments are reused; the scoring rubric and model are unchanged.
+The development run includes judgments collected before and after this
+retry-policy change.
+
+## Token chunk-size experiment preparation
+
+Prepared 256, 512 and 1024-token variants with a fixed 50-token
+overlap over the same 38 hash-verified baseline documents.
+
+Chunk counts: 1076, 853 and 797 respectively.
+All 80 development evidence quotes fit within a single chunk
+in every variant. This is lexical evidence coverage, not retrieval recall.
+
+Heading/page boundaries remain intact; short sections are not merged.
+The original 1200-character baseline remains a separate configuration.
+
+Chunk-size experiments use separate databases per variant.
+This preserves baseline data, avoids document/chunk uniqueness conflicts,
+and gives each variant independent HNSW and GIN indexes.
+Retrieval code and settings remain shared across variants.

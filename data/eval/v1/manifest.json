@@ -1,0 +1,13 @@
+{
+  "dataset_version": "v1",
+  "seed": 42,
+  "split_strategy": "document_grouped",
+  "selected_source_sha256": "41fa0f53191997c824ee2827943763eff32e813b0dcae7a273e988fabe26080a",
+  "dev_count": 80,
+  "test_count": 20,
+  "dev_sha256": "4f9de3805cff6fab5b004baf1f4aa7e15b71e2e826cd124b6bf504b7c4f4883d",
+  "test_sha256": "9bacd7c9a0f0c430d95c50812edabed089a994027484bfcfc1a90790269831a8",
+  "review_provenance": "assistant-reviewed",
+  "human_verified": false,
+  "relevance_scope": "generation_source_only"
+}
