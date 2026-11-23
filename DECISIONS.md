@@ -262,3 +262,30 @@ judge accuracy.
 
 Chunk-size latency measures database retrieval only. Held-out API
 search latency has a different scope and is not directly comparable.
+
+### Deferred judge provider failures
+
+Allow continuing to other questions after transient provider retries
+are exhausted. Deferred questions remain unscored and the run is reported
+as partial until all judgments are saved. The model, rubric, and saved
+successful judgments remain unchanged.
+
+### Judge transport-error compatibility
+
+Recognize httpx2 transport errors and operation timeouts as transient
+judge failures. These use the existing bounded retry and optional
+deferral policy. Validation errors remain distinct; model, rubric,
+answers and successful judgments are unchanged.
+
+Held-out answer evaluation is complete: 20/20 judgments.
+
+| Mode | Correctness | Relevancy | Faithfulness | Faithfulness N | Context precision | Abstention rate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Vector | 0.900 | 0.900 | 1.000 | 18 | 0.450 | 0.100 |
+
+All 20 questions had non-empty retrieved context. Two answers abstained.
+Faithfulness excludes abstentions and covers 18 answers.
+
+Scores use a custom same-model LLM judge and assistant-reviewed relevance
+labels. They do not establish independently verified accuracy.
+Retry and parser-policy changes are documented in DECISIONS.md.

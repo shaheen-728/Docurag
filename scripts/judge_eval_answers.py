@@ -2,13 +2,14 @@ import argparse
 import asyncio
 import hashlib
 import json
+from importlib import import_module
 from pathlib import Path
 from time import perf_counter
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from docurag.chat.generation import is_transient
+from docurag.chat.generation import is_transient as base_is_transient
 from docurag.chat.prompts import INSUFFICIENT_CONTEXT
 from docurag.core.config import get_settings
 from docurag.llm.base import LLMProvider
@@ -75,6 +76,19 @@ class Judgment(BaseModel):
     answer_correctness: Literal[0.0, 0.5, 1.0]
     abstained: bool
     reason: str = Field(min_length=1)
+
+
+def is_transient(error: BaseException) -> bool:
+    if base_is_transient(error) or isinstance(error, TimeoutError):
+        return True
+
+    # Some Gemini SDK installations use httpx2 instead of httpx.
+    try:
+        transport = import_module("httpx2")
+    except ModuleNotFoundError:
+        return False
+
+    return isinstance(error, transport.TransportError)
 
 
 def sha256(raw: bytes) -> str:
@@ -500,7 +514,15 @@ async def run(args: argparse.Namespace) -> None:
                         }
                     )
                     save_json(args.output, state)
-                    raise
+
+                    if not args.continue_on_provider_error or not is_transient(error):
+                        raise
+
+                    print(
+                        f"  deferred {question_id} {mode}: "
+                        f"{type(error).__name__}; no score saved",
+                        flush=True,
+                    )
 
                 await asyncio.sleep(args.pause)
 
@@ -508,6 +530,19 @@ async def run(args: argparse.Namespace) -> None:
         await provider.aclose()
 
     print(f"Saved: {args.output}")
+
+    pending = [
+        f"{question_id}/{mode}"
+        for question_id, modes in selected
+        for mode in modes
+        if mode not in state["judgments"].get(question_id, {})
+    ]
+
+    if pending:
+        print(f"PARTIAL: {len(pending)} judgments remain pending.")
+        print("Pending: " + ", ".join(pending))
+    else:
+        print("All selected judgments are saved.")
 
 
 def main() -> None:
@@ -531,6 +566,10 @@ def main() -> None:
         "--output",
         type=Path,
         default=Path("results/day5/baseline/judgments.json"),
+    )
+    parser.add_argument(
+        "--continue-on-provider-error",
+        action="store_true",
     )
     parser.add_argument("--model", default=None)
     parser.add_argument("--allow-heldout", action="store_true")

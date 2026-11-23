@@ -1,0 +1,52 @@
+{
+  "split": "test",
+  "complete": true,
+  "saved_judgments": 20,
+  "expected_judgments": 20,
+  "comparable_question_ids": [
+    "q007",
+    "q011",
+    "q013",
+    "q021",
+    "q042",
+    "q043",
+    "q051",
+    "q056",
+    "q065",
+    "q066",
+    "q072",
+    "q077",
+    "q084",
+    "q097",
+    "q103",
+    "q115",
+    "q127",
+    "q131",
+    "q142",
+    "q146"
+  ],
+  "judge_identity": {
+    "answers_sha256": "9c35b270af8ad049db4fffa17b1d6b91246856d5785fbadb26d5aab4efaa92f6",
+    "review_sha256": "50f3f2dc2281f01a90606d1aa9e5a9c5d878f801ed4d8b5c30182bed3332c369",
+    "dataset_sha256": "9bacd7c9a0f0c430d95c50812edabed089a994027484bfcfc1a90790269831a8",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "rubric_sha256": "8723a18f9b7b0c249ad92a9cf040ad3a74f096ddfd5a05635bad95438a41d8f6",
+    "metric_version": 1,
+    "timeout_seconds": 60.0
+  },
+  "rows": [
+    {
+      "mode": "vector",
+      "questions": 20,
+      "correctness": 0.9,
+      "relevancy": 0.9,
+      "faithfulness": 1.0,
+      "faithfulness_n": 18,
+      "context_precision": 0.45,
+      "context_precision_n": 20,
+      "abstention_rate": 0.1,
+      "empty_context_rate": 0
+    }
+  ]
+}

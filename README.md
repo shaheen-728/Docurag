@@ -1,5 +1,6 @@
 [![CI](https://github.com/shaheen-728/Docurag/actions/workflows/ci.yml/badge.svg)](https://github.com/shaheen-728/Docurag/actions/workflows/ci.yml)
 
+[Held-out answer report](results/day5/heldout/answer-metrics.md)
 ## Evaluation
 
 DocuRAG was evaluated on 80 development questions and a frozen
@@ -89,3 +90,16 @@ These reporting commands use saved artifacts and make no model API calls.
 Frozen datasets: `data/eval/v1/`
 
 Evaluation results: `results/day5/`
+
+Held-out answer evaluation is complete: 20/20 judgments.
+
+| Mode | Correctness | Relevancy | Faithfulness | Faithfulness N | Context precision | Abstention rate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Vector | 0.900 | 0.900 | 1.000 | 18 | 0.450 | 0.100 |
+
+All 20 questions had non-empty retrieved context. Two answers abstained.
+Faithfulness excludes abstentions and covers 18 answers.
+
+Scores use a custom same-model LLM judge and assistant-reviewed relevance
+labels. They do not establish independently verified accuracy.
+Retry and parser-policy changes are documented in DECISIONS.md.

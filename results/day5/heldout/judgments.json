@@ -1,0 +1,621 @@
+{
+  "identity": {
+    "answers_sha256": "9c35b270af8ad049db4fffa17b1d6b91246856d5785fbadb26d5aab4efaa92f6",
+    "review_sha256": "50f3f2dc2281f01a90606d1aa9e5a9c5d878f801ed4d8b5c30182bed3332c369",
+    "dataset_sha256": "9bacd7c9a0f0c430d95c50812edabed089a994027484bfcfc1a90790269831a8",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "rubric_sha256": "8723a18f9b7b0c249ad92a9cf040ad3a74f096ddfd5a05635bad95438a41d8f6",
+    "metric_version": 1,
+    "timeout_seconds": 60.0
+  },
+  "judgments": {
+    "q007": {
+      "vector": {
+        "claims": [],
+        "answer_relevancy": 0.0,
+        "answer_correctness": 0.0,
+        "abstained": true,
+        "reason": "Pure abstention on an answerable evaluation question.",
+        "faithfulness": null,
+        "claim_count": 0,
+        "supported_claim_count": 0,
+        "context_precision": 0.0,
+        "returned_context_count": 5,
+        "relevant_context_count": 0,
+        "judge_called": false,
+        "judge_latency_ms": 0.033
+      }
+    },
+    "q011": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The parameter used to specify the DNS name when defining a Service of type ExternalName is spec.externalName.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that you specify these Services with the spec.externalName parameter."
+          },
+          {
+            "text": "It is also referred to simply as the externalName parameter or externalName field.",
+            "supported": true,
+            "source_numbers": [
+              1,
+              3
+            ],
+            "reason": "Source 1 refers to externalName and Source 3 refers to the externalName field."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer correctly identifies spec.externalName as the parameter used to specify the DNS name for ExternalName services, supported by the context.",
+        "faithfulness": 1.0,
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "context_precision": 0.4,
+        "returned_context_count": 5,
+        "relevant_context_count": 2,
+        "judge_called": true,
+        "judge_latency_ms": 41934.254
+      }
+    },
+    "q013": {
+      "vector": {
+        "claims": [
+          {
+            "text": "To specify the maximum time a local image can remain unused, you should set the `imageMaximumGCAge` field in the kubelet configuration file.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that to specify the maximum time a local image can be unused, you need to set a value for the imageMaximumGCAge field in the kubelet configuration file."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and correctly identifies the imageMaximumGCAge field based on the retrieved context and reference answer.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.4,
+        "returned_context_count": 5,
+        "relevant_context_count": 2,
+        "judge_called": true,
+        "judge_latency_ms": 11483.811
+      }
+    },
+    "q021": {
+      "vector": {
+        "claims": [
+          {
+            "text": "You can scale Indexed Jobs up or down by mutating both .spec.parallelism and .spec.completions together such that .spec.parallelism == .spec.completions.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Directly supported by source 1."
+          },
+          {
+            "text": "When scaling down, Kubernetes removes the Pods with higher indexes.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Directly supported by source 1."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately and completely addresses the question using information directly supported by the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 12476.875
+      }
+    },
+    "q042": {
+      "vector": {
+        "claims": [
+          {
+            "text": "By default, Kubernetes deletes dependent objects when an owner object is deleted.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states directly: 'By default, Kubernetes deletes dependent objects.'"
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer correctly and directly addresses the question using supported information from the context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.8,
+        "returned_context_count": 5,
+        "relevant_context_count": 4,
+        "judge_called": true,
+        "judge_latency_ms": 1504.424
+      }
+    },
+    "q043": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The optional component that maintains network rules on nodes to implement Services is `kube-proxy`",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "The text states that kube-proxy is optional and maintains network rules on nodes to implement Services, which is directly supported by source 1."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately identifies kube-proxy as the optional component maintaining network rules for Services, matching the reference answer and supported by the context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 1728.691
+      }
+    },
+    "q051": {
+      "vector": {
+        "claims": [
+          {
+            "text": "Pods that are part of a DaemonSet tolerate being run on an unschedulable Node.",
+            "supported": true,
+            "source_numbers": [
+              1,
+              2
+            ],
+            "reason": "The retrieved context explicitly states that pods part of a DaemonSet tolerate being run on an unschedulable Node."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and correctly identifies DaemonSet pods as the type that tolerates running on an unschedulable node, supported by the context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.6,
+        "returned_context_count": 5,
+        "relevant_context_count": 3,
+        "judge_called": true,
+        "judge_latency_ms": 1920.833
+      }
+    },
+    "q056": {
+      "vector": {
+        "claims": [
+          {
+            "text": "However, double delivery may occur in rare cases, such as when a kubelet restarts in the middle of sending a hook and resends it after coming back up.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Directly supported by source 1."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately and comprehensively explains the intended delivery guarantee for container lifecycle hooks using facts directly supported by the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 13465.835
+      }
+    },
+    "q065": {
+      "vector": {
+        "claims": [
+          {
+            "text": "If you need to use more than one container runtime in your cluster, you can specify the `RuntimeClass` for a Pod to ensure that Kubernetes runs those containers using a particular container runtime.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "The text explicitly states: 'If you need to use more than one container runtime in your cluster, you can specify the RuntimeClass for a Pod to make sure that Kubernetes runs those containers using a particular container runtime.'"
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and accurately addresses how to ensure Kubernetes uses a specific container runtime when multiple are present by specifying the RuntimeClass, which is fully supported by the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 3154.546
+      }
+    },
+    "q066": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The supported operators for use with field selectors are =, ==, and != (where = and == mean the same thing).",
+            "supported": true,
+            "source_numbers": [
+              2
+            ],
+            "reason": "The text directly states that you can use =, ==, and != operators with field selectors and that = and == mean the same thing."
+          },
+          {
+            "text": "Set-based operators such as in, notin, and exists are not supported.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "The text directly states that set-based operators (in, notin, exists) are not supported for field selectors."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer correctly identifies all supported operators based on the retrieved context and reference answer, and includes additional accurate details supported by the context.",
+        "faithfulness": 1.0,
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "context_precision": 0.8,
+        "returned_context_count": 5,
+        "relevant_context_count": 4,
+        "judge_called": true,
+        "judge_latency_ms": 2226.062
+      }
+    },
+    "q072": {
+      "vector": {
+        "claims": [
+          {
+            "text": "externalIPs has been deprecated since Kubernetes v1.36",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that externalIPs is deprecated since Kubernetes v1.36."
+          },
+          {
+            "text": "The recommended alternatives are to use an external load balancer controller or a Gateway API implementation instead",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states to consider using an external load balancer controller or a Gateway API implementation instead."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately and completely provides the version since which externalIPs is deprecated and the recommended alternatives based on the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 21685.999
+      }
+    },
+    "q077": {
+      "vector": {
+        "claims": [],
+        "answer_relevancy": 0.0,
+        "answer_correctness": 0.0,
+        "abstained": true,
+        "reason": "Pure abstention on an answerable evaluation question.",
+        "faithfulness": null,
+        "claim_count": 0,
+        "supported_claim_count": 0,
+        "context_precision": 0.6,
+        "returned_context_count": 5,
+        "relevant_context_count": 3,
+        "judge_called": false,
+        "judge_latency_ms": 0.143
+      }
+    },
+    "q084": {
+      "vector": {
+        "claims": [
+          {
+            "text": "To specify the maximal number of pod failures per index when running an indexed Job, you set .spec.backoffLimitPerIndex.",
+            "supported": true,
+            "source_numbers": [
+              3
+            ],
+            "reason": "The text explicitly states to set .spec.backoffLimitPerIndex to specify the maximal number of pod failures per index."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately and completely addresses the question using the provided context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.6,
+        "returned_context_count": 5,
+        "relevant_context_count": 3,
+        "judge_called": true,
+        "judge_latency_ms": 2717.624
+      }
+    },
+    "q097": {
+      "vector": {
+        "claims": [
+          {
+            "text": "To make changes to a running containerized application, the correct process is to build a new image that includes the change, and then recreate the container to start from the updated image.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states verbatim that the correct process to make changes is to build a new image that includes the change, then recreate the container to start from the updated image."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and correctly addresses the question using information fully supported by the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.8,
+        "returned_context_count": 5,
+        "relevant_context_count": 4,
+        "judge_called": true,
+        "judge_latency_ms": 2640.595
+      }
+    },
+    "q103": {
+      "vector": {
+        "claims": [
+          {
+            "text": "Yes, a single Kubernetes Service can have multiple port definitions with different protocols.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that Kubernetes supports multiple port definitions for a single Service and each port definition can have the same protocol or a different one."
+          },
+          {
+            "text": "Each port definition can have the same protocol or a different one.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Directly supported by source 1."
+          },
+          {
+            "text": "However, for LoadBalancer type Services, by default all ports must have the same protocol.",
+            "supported": true,
+            "source_numbers": [
+              3
+            ],
+            "reason": "Supported by source 3 which states that for LoadBalancer type of Services, when there is more than one port defined, all ports must have the same protocol by default."
+          },
+          {
+            "text": "To use different protocols with a LoadBalancer Service, the MixedProtocolLBService feature (which is enabled by default as of v1.24) allows the use of different protocols when more than one port is defined.",
+            "supported": true,
+            "source_numbers": [
+              3
+            ],
+            "reason": "Supported by source 3 which mentions the MixedProtocolLBService feature enabled by default as of v1.24 allowing different protocols."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and completely answers the question, providing accurate details supported by the retrieved context, including relevant caveats about LoadBalancer services.",
+        "faithfulness": 1.0,
+        "claim_count": 4,
+        "supported_claim_count": 4,
+        "context_precision": 1.0,
+        "returned_context_count": 5,
+        "relevant_context_count": 5,
+        "judge_called": true,
+        "judge_latency_ms": 12186.608
+      }
+    },
+    "q115": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The purpose of the kubelet's --node-status-update-frequency parameter is to specify how often the kubelet posts its node status to the API server.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states: '--node-status-update-frequency - Specifies how often kubelet posts its node status to the API server.'"
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and correctly addresses the purpose of the parameter using the provided context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.2,
+        "returned_context_count": 5,
+        "relevant_context_count": 1,
+        "judge_called": true,
+        "judge_latency_ms": 18104.965
+      }
+    },
+    "q127": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The kubectl command to select all Statefulsets and Services that are not in the default namespace is kubectl get statefulsets,services --all-namespaces --field-selector metadata.namespace!=default",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "The command is explicitly provided in source 1 as selecting all Statefulsets and Services not in the default namespace."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer correctly identifies the exact kubectl command requested based on the provided context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.6,
+        "returned_context_count": 5,
+        "relevant_context_count": 3,
+        "judge_called": true,
+        "judge_latency_ms": 60806.382
+      }
+    },
+    "q131": {
+      "vector": {
+        "claims": [
+          {
+            "text": "Clients should use the EndpointSlice API instead of the deprecated Endpoints API.",
+            "supported": true,
+            "source_numbers": [
+              1,
+              2
+            ],
+            "reason": "Both sources explicitly state that clients should use the EndpointSlice API rather than the deprecated Endpoints API."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer directly and correctly identifies the EndpointSlice API as the recommended alternative to the deprecated Endpoints API based on the retrieved context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.4,
+        "returned_context_count": 5,
+        "relevant_context_count": 2,
+        "judge_called": true,
+        "judge_latency_ms": 1932.886
+      }
+    },
+    "q142": {
+      "vector": {
+        "claims": [
+          {
+            "text": "By default, the node controller checks the state of each node every 5 seconds.",
+            "supported": true,
+            "source_numbers": [
+              1,
+              2
+            ],
+            "reason": "Both sources explicitly state that by default, the node controller checks the state of each node every 5 seconds."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer accurately states that the node controller checks the state of each node every 5 seconds by default, matching the reference answer and supported by the context.",
+        "faithfulness": 1.0,
+        "claim_count": 1,
+        "supported_claim_count": 1,
+        "context_precision": 0.4,
+        "returned_context_count": 5,
+        "relevant_context_count": 2,
+        "judge_called": true,
+        "judge_latency_ms": 2435.618
+      }
+    },
+    "q146": {
+      "vector": {
+        "claims": [
+          {
+            "text": "The exec hook action is executed in the container.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that exec is executed in the container."
+          },
+          {
+            "text": "httpGet, tcpSocket (deprecated), and sleep are executed by the kubelet process.",
+            "supported": true,
+            "source_numbers": [
+              1
+            ],
+            "reason": "Source 1 states that httpGet, tcpSocket (deprecated), and sleep are executed by the kubelet process."
+          }
+        ],
+        "answer_relevancy": 1.0,
+        "answer_correctness": 1.0,
+        "abstained": false,
+        "reason": "The answer correctly identifies that the exec hook action is executed inside the container and provides the additional context mentioned in the source.",
+        "faithfulness": 1.0,
+        "claim_count": 2,
+        "supported_claim_count": 2,
+        "context_precision": 0.4,
+        "returned_context_count": 5,
+        "relevant_context_count": 2,
+        "judge_called": true,
+        "judge_latency_ms": 3868.293
+      }
+    }
+  },
+  "errors": [
+    {
+      "question_id": "q021",
+      "mode": "vector",
+      "error_type": "ValidationError"
+    },
+    {
+      "question_id": "q056",
+      "mode": "vector",
+      "error_type": "ServerError"
+    },
+    {
+      "question_id": "q056",
+      "mode": "vector",
+      "error_type": "ServerError"
+    },
+    {
+      "question_id": "q056",
+      "mode": "vector",
+      "error_type": "ReadTimeout"
+    },
+    {
+      "question_id": "q056",
+      "mode": "vector",
+      "error_type": "ReadTimeout"
+    },
+    {
+      "question_id": "q056",
+      "mode": "vector",
+      "error_type": "ServerError"
+    },
+    {
+      "question_id": "q103",
+      "mode": "vector",
+      "error_type": "ServerError"
+    }
+  ]
+}
