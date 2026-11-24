@@ -43,6 +43,48 @@ A successful answer ends with a `done` event containing
 
 This is a project demo, not a production-availability guarantee.
 
+## Architecture
+
+### Public demo
+
+```mermaid
+flowchart TD
+    Client["Client: Swagger or curl"] --> API["FastAPI on Render"]
+    API --> Cache["Render Key Value: cache and rate limits"]
+    API --> DB["Neon PostgreSQL with pgvector"]
+    API --> Gemini["Gemini: query embeddings and generation"]
+    API --> Response["SSE answer tokens and source citations"]
+    Response --> Client
+```
+
+The public demo serves a pre-ingested corpus. Document routes and
+cross-encoder reranking are disabled.
+
+### Local document ingestion
+
+```mermaid
+flowchart TD
+    Upload["Document upload"] --> API["FastAPI"]
+    API --> Files["Shared upload volume"]
+    API --> DB["PostgreSQL: document status"]
+    API --> Queue["Redis task queue"]
+    Queue --> Worker["Celery worker"]
+    Files --> Worker
+    Worker --> Parse["Parse and chunk"]
+    Parse --> Embed["Gemini document embeddings"]
+    Embed --> DB
+```
+
+API and worker share upload storage locally. The worker saves chunks,
+embeddings, metadata and completion status in PostgreSQL.
+
+### Evaluation and observability
+
+Frozen datasets, saved retrieval runs, reviewed relevance labels and
+answer judgments produce reproducible reports. Langfuse tracing is
+available locally and disabled in the public demo. GitHub Actions runs
+lint, formatting, migrations and database tests.
+
 ## Evaluation
 
 DocuRAG was evaluated on 80 development questions and a frozen
