@@ -15,9 +15,14 @@ class Settings(BaseSettings):
 
     app_name: str = "DocuRAG"
 
+    documents_enabled: bool = True
+    reranker_enabled: bool = True
+
     postgres_db: str = "docurag"
     postgres_user: str = "docurag"
     postgres_password: SecretStr
+
+    db_ssl_mode: Literal["disable", "verify-full"] = "disable"
 
     db_host: str = "postgres"
     db_port: int = Field(default=5432, ge=1, le=65535)
@@ -82,6 +87,7 @@ class Settings(BaseSettings):
             host=self.db_host,
             port=self.db_port,
             database=self.postgres_db,
+            query={"ssl": self.db_ssl_mode},
         )
 
 

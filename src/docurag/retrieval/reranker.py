@@ -15,6 +15,9 @@ class RerankerUnavailable(RuntimeError):
 
 @lru_cache(maxsize=1)
 def load_model():
+    if not get_settings().reranker_enabled:
+        raise RerankerUnavailable("Reranking is disabled for this deployment.")
+
     # Import lazily so ordinary keyword search doesn't load PyTorch.
     import torch
     from sentence_transformers import CrossEncoder

@@ -1,0 +1,64 @@
+services:
+  - type: web
+    name: docurag-demo
+    runtime: docker
+    plan: free
+    region: ohio
+    branch: main
+    dockerfilePath: ./Dockerfile.deploy
+    dockerContext: .
+    healthCheckPath: /health
+
+    envVars:
+      - key: PORT
+        value: "8000"
+
+      - key: DOCUMENTS_ENABLED
+        value: "false"
+      - key: RERANKER_ENABLED
+        value: "false"
+      - key: LANGFUSE_ENABLED
+        value: "false"
+
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "5432"
+      - key: POSTGRES_DB
+        sync: false
+      - key: POSTGRES_USER
+        sync: false
+      - key: POSTGRES_PASSWORD
+        sync: false
+      - key: DB_SSL_MODE
+        value: verify-full
+      - key: PGSSLROOTCERT
+        value: /etc/ssl/certs/ca-certificates.crt
+
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_GENERATION_MODEL
+        value: gemini-3.5-flash-lite
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: EMBEDDING_DIMENSIONS
+        value: "768"
+
+      - key: RETRIEVAL_CACHE_ENABLED
+        value: "true"
+      - key: RETRIEVAL_CACHE_TTL_SECONDS
+        value: "60"
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: docurag-demo-redis
+          property: connectionString
+
+  - type: keyvalue
+    name: docurag-demo-redis
+    plan: free
+    region: ohio
+    ipAllowList: []
+    maxmemoryPolicy: allkeys-lru
