@@ -289,3 +289,27 @@ Faithfulness excludes abstentions and covers 18 answers.
 Scores use a custom same-model LLM judge and assistant-reviewed relevance
 labels. They do not establish independently verified accuracy.
 Retry and parser-policy changes are documented in DECISIONS.md.
+
+## free public API deployment
+
+Deploy the API on Render Free, PostgreSQL/pgvector on Neon Free,
+and caching/rate-limit storage on Render Free Key Value.
+
+Use Dockerfile.deploy with UID 10001. Require verified database TLS
+and configure the system CA bundle through PGSSLROOTCERT.
+
+Disable document routes and cross-encoder reranking in the public demo.
+Keep the full ingestion workflow available through local Docker Compose.
+
+Copied and fingerprint-verified 38 completed documents and 991 chunks.
+Existing embeddings were reused; cloud storage paths were cleared.
+
+Verified the deployed health endpoint, keyword retrieval, streaming
+chat with citations and a completion event, retrieval cache hits,
+and absence of document routes from the public API schema.
+
+Public API documentation:
+https://docurag-demo.onrender.com/docs
+
+Free-tier sleep behavior, ephemeral cache storage, and model-provider
+quota/availability limits are documented in README.
