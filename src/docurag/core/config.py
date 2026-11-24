@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://redis:6379/0"
 
     llm_provider: Literal["gemini", "openai"] = "gemini"
-    embedding_dimensions: Literal[768] = 768
+    embedding_dimensions: int = Field(default=768, ge=768, le=768)
 
     gemini_api_key: SecretStr = SecretStr("")
     gemini_generation_model: str = "gemini-3.8-flash"
